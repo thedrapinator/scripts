@@ -1,6 +1,6 @@
 #/bin/bash
 
-#### IF ARG is anything but 1 then write out help file ###
+###### IF ARG is anything but 1 then write out help file ###
 
 
 
