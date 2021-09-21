@@ -17,14 +17,18 @@ cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
 #make folder
 mkdir -p ~/projects/$companyname
 
-# if inscope does not exist then exit
-if [ ! -f $companypath/inscope.txt ]
-then
-    echo "inscope.txt not found. Exiting!"
-    exit 1
-else
-    echo "In scope file found."
-fi
+####(NOT NEEDED FOR OSINT)#####
+# if inscope does not exist then exit   
+
+#if [ ! -f $companypath/inscope.txt ]
+#then
+#    echo "inscope.txt not found. Exiting!"
+#    exit 1
+#else
+#    echo "In scope file found."
+#fi
+
+
 
 ###Block Comment for troubleshooting ####
 : <<'END'
