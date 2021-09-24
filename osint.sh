@@ -78,7 +78,7 @@ theHarvester -d $domain -b all > $companypath/harvester_all.txt
 # add to domain ip
 cat $companypath/harvester_all.txt | grep $domain | grep -v @ | grep -v Target | sed 's/:/ /g' >> $companypath/domain_ip_combined.txt
 # Create email list
-cat $companypath/harvester_all.txt | grep @$domain > email_combined.txt
+cat $companypath/harvester_all.txt | grep @$domain > $companypath/email_combined.txt
 
 
 ### BREACHES ###
