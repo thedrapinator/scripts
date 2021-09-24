@@ -93,6 +93,7 @@ cat $companypath/$companyname-breach-users.txt >> $companypath/email_combined.tx
 cat $companypath/email_combined.txt| sort -u > $companypath/email_FINAL.txt
 cat $companypath/domain_ip_combined.txt| sort -u > $companypath/domain_ip_FINAL.txt
 
+
 ###### CLEANUP ######
 
 #Move all working files to another folder

@@ -37,10 +37,9 @@ END
 
 
 
-### nmap scan
+### nmap scan ## Replace with autorecon???
 mkdir -p $companypath/$companyname/nmap
-nmap -v -sV -O -iL inscope.txt -oA $companypath/$companyname/nmap/$companyname
-
+nmap -vv -sV -O -iL inscope.txt -oA $companypath/$companyname/nmap/$companyname
 
 
 ## DNS zone transfer attempt??
