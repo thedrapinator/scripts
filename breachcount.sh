@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# ADD INSTALL COMMAND FOR PROGRAM USED
+
 extension=`echo $1 | cut -d "." -f1`
 countfile=$extension-breachcount.txt
 touch $countfile
