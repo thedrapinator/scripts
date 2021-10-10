@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# ADD INSTALL COMMAND FOR PROGRAM USED
+#INSTALL COMMAND FOR PROGRAM USED
+#https://github.com/wKovacs64/pwned
+npm install pwned -g
 
 extension=`echo $1 | cut -d "." -f1`
 countfile=$extension-breachcount.txt
 touch $countfile
-
 
 cat $1 | while read line 
 do
@@ -15,3 +16,4 @@ do
    sleep 2
 done
 
+echo "COMPLETED!! Data is stored in $countfile"
