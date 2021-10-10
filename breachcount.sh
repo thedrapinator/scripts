@@ -4,6 +4,8 @@
 #https://github.com/wKovacs64/pwned
 npm install pwned -g
 
+echo "Add api key with command 'pwned apiKey <key>'"
+
 extension=`echo $1 | cut -d "." -f1`
 countfile=$extension-breachcount.txt
 touch $countfile
