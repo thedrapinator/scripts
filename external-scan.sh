@@ -34,15 +34,20 @@ END
 #########################################
 
 ### nmap scan ##                               ######### Replace with autorecon ##########
-mkdir -p $companypath/$companyname/nmap
-nmap -vv -sV -O -iL inscope.txt -oA $companypath/nmap/$companyname
+#mkdir -p $companypath/$companyname/nmap
+#nmap -vv -sV -O -iL inscope.txt -oA $companypath/nmap/$companyname
 
 ## DNS zone transfer attempt??
-cat $companyname.gnmap| grep 53/open | cut -d " " -f2 > $companypath/nmap/dns_servers.txt
-nmap -p53 -sV -v --script=dns-zone-transfer.nse -iL $companypath/nmap/dns_servers.txt -oA $companypath/nmap/dns_zone_results
+#cat $companyname.gnmap| grep 53/open | cut -d " " -f2 > $companypath/nmap/dns_servers.txt
+#nmap -p53 -sV -v --script=dns-zone-transfer.nse -iL $companypath/nmap/dns_servers.txt -oA $companypath/nmap/dns_zone_results
+
+echo "STARTING AUTORECON!!!"
+mkdir -p $companypath/autorecon
+cd $companypath/autorecon
+autorecon -t $companypath/inscope.txt --only-scans-dir -o $companypath/autorecon/results
 
 # eyewitness (run at end because of prompt)
-cd $companypath/nmap/
-eyewitness -x $companypath/nmap/$companyname.xml --delay 5
-
+cd $companypath/
+#### Fix to read autorecon results #####
+#eyewitness -x $companypath/nmap/$companyname.xml --delay 5 -d $companypath/eyewitness     
 
