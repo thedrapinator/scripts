@@ -1,11 +1,14 @@
 #/bin/bash
 
-###### IF ARG is anything but 1 then write out help file ###
+###### TO DO  #######
+# Sort files to folders you crazy unorganized person
+# add breachcount script after breachparse
+# make sure breachparse and pwned are installed in the tools script
 
-
+echo "Enter company domain (ex. tesla.com)"
+read -p 'Domain: ' $domain
 
 ### SET VARIABLES ###
-domain=$1
 echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
@@ -14,8 +17,8 @@ echo "Files stored in $companypath"
 cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
 #echo $cidr
 
-#make folder
-mkdir -p ~/projects/$companyname
+#make folder if it does not exist
+mkdir -p $companypath
 
 ####(NOT NEEDED FOR OSINT)#####
 # if inscope does not exist then exit   
