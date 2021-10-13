@@ -44,7 +44,7 @@ END
 echo "STARTING AUTORECON!!!"
 mkdir -p $companypath/autorecon
 cd $companypath/autorecon
-autorecon -t $companypath/inscope.txt --only-scans-dir -o $companypath/autorecon/results
+autorecon -t $companypath/inscope.txt --only-scans-dir -o $companypath/autorecon
 
 # eyewitness (run at end because of prompt)
 cd $companypath/
