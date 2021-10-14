@@ -53,3 +53,18 @@ echo "STARTING AUTORECON!!!"
 mkdir -p $companypath/autorecon
 cd $companypath/autorecon
 autorecon -t $companypath/inscope.txt -o $companypath/autorecon
+
+## Sort Results ###
+
+#Sort zone transfers
+cd $companypath/autorecon
+touch zone_transfer.txt
+find -name *zone-transfer* -exec cat {} >> zone_transfer.txt \;
+
+
+
+
+
+
+
+
