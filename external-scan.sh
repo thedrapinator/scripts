@@ -52,4 +52,4 @@ eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 5 -d $compa
 echo "STARTING AUTORECON!!!"
 mkdir -p $companypath/autorecon
 cd $companypath/autorecon
-autorecon -t $companypath/inscope.txt --only-scans-dir -o $companypath/autorecon
+autorecon -t $companypath/inscope.txt -o $companypath/autorecon
