@@ -58,13 +58,7 @@ autorecon -t $companypath/inscope.txt -o $companypath/autorecon
 
 #Sort zone transfers
 cd $companypath/autorecon
-touch zone_transfer.txt
-find -name *zone-transfer* -exec cat {} >> zone_transfer.txt \;
-
-
-
-
-
-
-
-
+touch zone_transfer_temp.txt
+find -name *zone-transfer* -exec cat {} \; | grep ^'\.' | cut -f7 >> zone_transfer_temp.txt 
+cat zone_transfer_temp.txt | sort -u > zone_transfer.txt
+rm zone_transfer_temp.txt
