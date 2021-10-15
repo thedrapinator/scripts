@@ -2,7 +2,7 @@
 
 #INSTALL COMMAND FOR PROGRAM USED
 #https://github.com/wKovacs64/pwned
-npm install pwned -g
+#npm install pwned -g
 
 echo "Add api key with command 'pwned apiKey <key>'"
 
@@ -12,11 +12,13 @@ touch $countfile
 
 cat $1 | while read line 
 do
-   count=`pwned ba $line | grep Name | wc -l`
-   sleep 2
-   clear=`pwned pa $line | grep Date | wc -l`
+   pwned search $line > breach_temp.txt
+   count=`cat breach_temp.txt | grep Name | wc -l`
+   clear =`cat breach_temp.txt | grep Date | wc -l`
+   date =`cat breach_temp.txt | grep Date | tail -1 | sed 's/ //g' | cut -d ":" -f2,3 | cut -d "T" -f1`
    echo "$line ($count) ($clear)*"
-   echo "$line ($count) ($clear)*" >> $countfile
+   echo "$line ($count) ($clear)* ($date)" >> $countfile
+   rm breach_temp.txt
    sleep 2
 done
 
