@@ -14,12 +14,12 @@ cat $1 | while read line
 do
    pwned search $line > breach_temp.txt
    count=`cat breach_temp.txt | grep Name | wc -l`
-   clear =`cat breach_temp.txt | grep Date | wc -l`
-   date =`cat breach_temp.txt | grep Date | tail -1 | sed 's/ //g' | cut -d ":" -f2,3 | cut -d "T" -f1`
+   clear=`cat breach_temp.txt | grep Date | wc -l`
+   date=`cat breach_temp.txt | grep Date | tail -1 | sed 's/ //g' | cut -d ":" -f2,3 | cut -d "T" -f1`
    echo "$line ($count) ($clear)* ($date)"
    echo "$line ($count) ($clear)* ($date)" >> $countfile
    rm breach_temp.txt
-   sleep 2
+   sleep 3
 done
 
 echo "COMPLETED!! Data is stored in $countfile"
