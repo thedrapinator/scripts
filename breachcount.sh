@@ -13,8 +13,10 @@ touch $countfile
 cat $1 | while read line 
 do
    count=`pwned ba $line | grep Name | wc -l`
-   echo "$line ($count)"
-   echo "$line ($count)" >> $countfile
+   sleep 2
+   clear=`pwned pa $line | grep Date | wc -l`
+   echo "$line ($count) ($clear)*"
+   echo "$line ($count) ($clear)*" >> $countfile
    sleep 2
 done
 
