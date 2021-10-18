@@ -96,6 +96,9 @@ cat $companypath/$companyname-breach-users.txt >> $companypath/email_combined.tx
 cat $companypath/email_combined.txt| sort -u > $companypath/email_FINAL.txt
 cat $companypath/domain_ip_combined.txt| sort -u > $companypath/domain_ip_FINAL.txt
 
+### Turn emails into f-last format ###
+cat $companypath/email_FINAL.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*)/& \L\1\2/' | cut -d " " -f2 | sort -u > $companypath/possible_domain_users.txt
+
 
 ###### CLEANUP ######
 
