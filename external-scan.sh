@@ -34,7 +34,7 @@ END
 #########################################
 
 ### nmap scan ##
-mkdir -p $companypath/$companyname/nmap
+mkdir -p $companypath/nmap
 nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
 
 ##Convert nmap scan to CSV for spreadsheet
@@ -51,7 +51,7 @@ eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 5 -d $compa
 ### AUTORECON ###
 echo "STARTING AUTORECON!!!"
 mkdir -p $companypath/autorecon
-cd $companypath/autorecon
+#cd $companypath/autorecon
 autorecon -t $companypath/inscope.txt -o $companypath/autorecon
 
 ## Sort Results ###
@@ -62,3 +62,5 @@ touch zone_transfer_temp.txt
 find -name *zone-transfer* -exec cat {} \; | grep ^'\.' | cut -f7 >> zone_transfer_temp.txt 
 cat zone_transfer_temp.txt | sort -u > zone_transfer.txt
 rm zone_transfer_temp.txt
+
+echo "SCRIPT COMPLETED!!! (chris is awesome)"
