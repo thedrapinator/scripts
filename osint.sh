@@ -6,7 +6,7 @@
 # make sure breachparse and pwned are installed in the tools script
 
 echo "Enter company domain (ex. tesla.com)"
-read -p 'Domain: ' $domain
+read -p 'Domain: ' domain
 
 ### SET VARIABLES ###
 echo "Domain = $domain"
