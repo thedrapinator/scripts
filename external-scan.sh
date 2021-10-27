@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Enter company domain (ex. tesla.com)"
-read -p 'Domain: ' $domain
+read -p 'Domain: ' domain
 
 ### SET VARIABLES ###
 echo "Domain = $domain"
