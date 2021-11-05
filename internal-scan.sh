@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Enter company folder name"
-read -p 'Domain: ' companyname
+read -p 'Company Name: ' companyname
 
 ### SET VARIABLES ###
 echo "Company Name = $companyname"
