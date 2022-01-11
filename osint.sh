@@ -41,25 +41,25 @@ END
 
 
 ### GOOGLE DORKING #####
-echo "LAUNCHING BROWSER!"
-firefox "https://www.google.com/search?q=site:$domain ext:pwd OR ext:bak OR ext:skr OR ext:pgp OR ext:config OR ext:psw OR ext:inc OR ext:mdb OR ext:conf OR ext:dat OR ext:eml OR ext:log"&
-sleep 1
-firefox "https://www.google.com/search?q=site:$domain inurl:'htaccess' OR inurl:'passwd' OR inurl:'shadow' OR inurl:'htusers' OR inurl:'web.config' OR inurl:'ftp' OR inurl:'confidential' OR inurl:'login' OR inurl:'admin'"&
-sleep 1
-firefox "https://www.google.com/search?q=site:$domain intitle:'Index of' OR intitle:'index.of'"&
-sleep 1
-firefox "https://www.google.com/search?q=site:$domain (ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt OR ext:ps OR ext:rtf OR ext:odt OR ext:sxw OR ext:psw OR ext:ppt OR ext:pps OR ext:xml) 'username * password'"&
-sleep 1
+#echo "LAUNCHING BROWSER!"
+#runuser -l kali -c 'firefox "https://www.google.com/search?q=site:$domain ext:pwd OR ext:bak OR ext:skr OR ext:pgp OR ext:config OR ext:psw OR ext:inc OR ext:mdb OR ext:conf OR ext:dat OR ext:eml OR ext:log"&'
+#sleep 1
+#firefox "https://www.google.com/search?q=site:$domain inurl:'htaccess' OR inurl:'passwd' OR inurl:'shadow' OR inurl:'htusers' OR inurl:'web.config' OR inurl:'ftp' OR inurl:'confidential' OR inurl:'login' OR inurl:'admin'"&
+#sleep 1
+#firefox "https://www.google.com/search?q=site:$domain intitle:'Index of' OR intitle:'index.of'"&
+#sleep 1
+#firefox "https://www.google.com/search?q=site:$domain (ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt OR ext:ps OR ext:rtf OR ext:odt OR ext:sxw OR ext:psw OR ext:ppt OR ext:pps OR ext:xml) 'username * password'"&
+#sleep 1
 #### DNSDUMPSTER ###
-firefox "https://dnsdumpster.com/"&
-sleep 1
+#firefox "https://dnsdumpster.com/"&
+#sleep 1
 ### WAYBACK ###
-firefox "https://web.archive.org/web/*/$domain/*"&
-echo "Search wayback search for pwd bak skr pgp config psw inc mdb conf dat eml log"
-sleep 1
+#firefox "https://web.archive.org/web/*/$domain/*"&
+#echo "Search wayback search for pwd bak skr pgp config psw inc mdb conf dat eml log"
+#sleep 1
 ### ROBOTS ###
-firefox "$domain/robots.txt"
-sleep 1
+#firefox "$domain/robots.txt"
+#sleep 1
 
 
 
