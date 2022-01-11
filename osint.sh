@@ -14,7 +14,7 @@ companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
 companypath=~/projects/$companyname/osint
 echo "Files stored in $companypath"
-cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
+#cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
 #echo $cidr
 
 #make folder if it does not exist
