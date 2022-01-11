@@ -7,10 +7,9 @@ read -p 'Domain: ' domain
 echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
-companypath=~/projects/$companyname
+companypath=~/projects/$companyname/externalscan
 echo "Files stored in $companypath"
-cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
-#echo $cidr
+
 
 #make folder if it does not exist
 mkdir -p $companypath
@@ -28,6 +27,10 @@ else
     echo "In scope file found."
 fi
 
+#CIDR
+cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
+#echo $cidr
+
 ###Block Comment for troubleshooting ####
 : <<'END'
 END
@@ -38,7 +41,7 @@ mkdir -p $companypath/nmap
 nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
 
 ##Convert nmap scan to CSV for spreadsheet
-python3 ~/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
+python3 /opt/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
 
 # eyewitness
 cd $companypath/
