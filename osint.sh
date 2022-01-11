@@ -12,7 +12,7 @@ read -p 'Domain: ' domain
 echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
-companypath=~/projects/$companyname
+companypath=~/projects/$companyname/osint
 echo "Files stored in $companypath"
 cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
 #echo $cidr
