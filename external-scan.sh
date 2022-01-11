@@ -7,7 +7,7 @@ read -p 'Domain: ' domain
 echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
-companypath=~/projects/$companyname/externalscan
+companypath=~/projects/$companyname
 echo "Files stored in $companypath"
 
 
