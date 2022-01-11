@@ -19,6 +19,7 @@ cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
 
 #make folder if it does not exist
 mkdir -p $companypath
+cd $companypath
 
 ####(NOT NEEDED FOR OSINT)#####
 # if inscope does not exist then exit   
@@ -71,7 +72,6 @@ echo "LAUNCHING AMASS!"
 #amass enum -d $domain -config ~/config.ini -cidr $cidr
 amass enum -d $domain -config ~/config.ini
 
-
 amass db -d $domain -names -ip > $companypath/amass_domains_ip.txt
 cat $companypath/amass_domains_ip.txt > $companypath/domain_ip_combined.txt
 
@@ -84,11 +84,11 @@ cat $companypath/harvester_all.txt | grep $domain | grep -v @ | grep -v Target |
 cat $companypath/harvester_all.txt | grep @$domain > $companypath/email_combined.txt
 
 
-### BREACHES ###
-echo "LAUNCHING BREACHPARSE!"
-cd $companypath
-breach-parse @$domain $companyname-breach
-cat $companypath/$companyname-breach-users.txt >> $companypath/email_combined.txt
+### BREACHES ###    NOTE: REMOVED SINCE HAVEIBEENPWNED COMPLETED THIS TASK
+#echo "LAUNCHING BREACHPARSE!"
+#cd $companypath
+#breach-parse @$domain $companyname-breach
+#cat $companypath/$companyname-breach-users.txt >> $companypath/email_combined.txt
 
 
 ###### SORT DATA #####
