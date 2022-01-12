@@ -45,7 +45,7 @@ python3 /opt/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $comp
 
 # eyewitness
 cd $companypath/
-eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 5 -d $companypath/eyewitness      
+eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 10 -d $companypath/eyewitness      
 
 ## DNS zone transfer attempt ## AUTORECON DOES THIS
 #cat $companyname.gnmap| grep 53/open | cut -d " " -f2 > $companypath/nmap/dns_servers.txt
