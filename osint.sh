@@ -70,7 +70,7 @@ END
 echo "LAUNCHING AMASS!"
 
 #amass enum -d $domain -config ~/config.ini -cidr $cidr
-amass enum -d $domain -r 8.8.8.8 -timeout 60 # -config ~/config.ini     ### This file has been lost in old VM need to recreate https://github.com/OWASP/Amass/blob/master/examples/config.ini
+amass enum -d $domain -r 8.8.8.8 -timeout 60 -config ~/amass-config.ini     ### This file has been lost in old VM need to recreate https://github.com/OWASP/Amass/blob/master/examples/config.ini
 
 amass db -d $domain -names -ip > $companypath/amass_domains_ip.txt
 cat $companypath/amass_domains_ip.txt > $companypath/domain_ip_combined.txt
