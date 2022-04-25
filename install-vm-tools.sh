@@ -16,5 +16,5 @@ sudo /opt/EyeWitness/Python/setup/setup.sh
 #xmltocsv
 sudo git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git
 
-
+echo "COPY OVER SSH CONFIG AND PROXYCHAINS CONFIG"
 echo "CHANGE TRANSPARENCY IN VM"
