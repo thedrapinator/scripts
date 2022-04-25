@@ -17,4 +17,5 @@ sudo /opt/EyeWitness/Python/setup/setup.sh
 sudo git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git
 
 echo "COPY OVER SSH CONFIG AND PROXYCHAINS CONFIG"
+echo "MANUAL INSTALL FOXYPROXY AND WAPALIZER"
 echo "CHANGE TRANSPARENCY IN VM"
