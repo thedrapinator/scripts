@@ -25,8 +25,8 @@ END
 #########################################
 
 ## Breach Database Emails
-curl -H "Authorization: apikey $api" https://pwnd.tiden.io/search\?domain\=$domain
-#Put in form
+curl -H "Authorization: apikey $api" https://pwnd.tiden.io/search\?domain\=$domain | jq -r '.[] | "\(.username):\(.password)"' > $companypath/breach-database.txt
+cat $companypath/breach-database.txt | cut -d ":" -f1 > $companypath/emails.txt
 
 ### GOOGLE DORKING #####
 echo "LAUNCHING BROWSER!"
