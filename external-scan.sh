@@ -7,15 +7,14 @@ read -p 'Domain: ' domain
 echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
-companypath=~/projects/$companyname
+companypath=/home/kali/projects/$companyname
 echo "Files stored in $companypath"
-
 
 #make folder if it does not exist
 mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
-sleep 3
+sleep 1
 gedit $companypath/inscope.txt
 
 # if inscope does not exist then exit
@@ -27,10 +26,6 @@ else
     echo "In scope file found."
 fi
 
-#CIDR
-cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
-#echo $cidr
-
 ###Block Comment for troubleshooting ####
 : <<'END'
 END
@@ -38,32 +33,16 @@ END
 
 ### nmap scan ##
 mkdir -p $companypath/nmap
-nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
+sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
-python3 /opt/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
+python3 /opt/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
+#python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
-cd $companypath/
-eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 10 -d $companypath/eyewitness      
+mkdir -p $companypath/eyewitness
+cd $companypath/eyewitness
+#sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+/opt/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
-## DNS zone transfer attempt ## AUTORECON DOES THIS
-#cat $companyname.gnmap| grep 53/open | cut -d " " -f2 > $companypath/nmap/dns_servers.txt
-#nmap -p53 -sV -v --script=dns-zone-transfer.nse -iL $companypath/nmap/dns_servers.txt -oA $companypath/nmap/dns_zone_results
-
-### AUTORECON ###
-echo "STARTING AUTORECON!!!"
-mkdir -p $companypath/autorecon
-#cd $companypath/autorecon
-autorecon --target-timeout 30 -t $companypath/inscope.txt -o $companypath/autorecon
-
-## Sort Results ###
-
-#Sort zone transfers
-cd $companypath/autorecon
-touch zone_transfer_temp.txt
-find -name *zone-transfer* -exec cat {} \; | grep ^'\.' | cut -f7 >> zone_transfer_temp.txt 
-cat zone_transfer_temp.txt | sort -u > zone_transfer.txt
-rm zone_transfer_temp.txt
-
-echo "SCRIPT COMPLETED!!! (chris is awesome)"
+echo "SCRIPT COMPLETED!!!"
