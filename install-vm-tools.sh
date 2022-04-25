@@ -4,7 +4,7 @@
 
 cd /opt
 sudo apt update
-sudo apt install -y bloodhound eyewitness chromium gedit enum4linux ldapscripts
+sudo apt install -y bloodhound eyewitness chromium gedit enum4linux ldapscripts jq
 
 #eyewitness install
 cd /opt
