@@ -60,7 +60,7 @@ firefox "https://dnsdumpster.com/"&
 ## Phonebook.cz combine with emails
 firefox "https://phonebook.cz/"&
 ## Hunter.io
-firefox "https://hunter.io/"&
+#firefox "https://hunter.io/"&
 
 #Combine email lists, clean, make possible users list
 gedit $companypath/emails_combined.txt
