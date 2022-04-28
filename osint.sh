@@ -56,4 +56,11 @@ firefox "https://phonebook.cz/"&
 ## Hunter.io
 firefox "https://hunter.io/"&
 
+#Combine email lists, clean, make possible users list
+gedit $companypath/emails_combined.txt
+cat $companypath/emails_combined.txt | cut -d "@" -f1 | grep -v "\." | sort -u > $companypath/possible_users_tmp.txt
+cat $companypath/emails_combined.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*)/& \L\1\2/' | cut -d " " -f2 | sort -u >> $companypath/possible_users_tmp.txt
+sort -u $companypath/possible_users_tmp.txt > $companypath/possible_users.txt
+rm $companypath/possible_users_tmp.txt
+
 echo "=======DONE======"
