@@ -4,6 +4,8 @@
 
 cd /opt
 sudo apt update
+sudo apt reinstall libwacom-common -y
+sudo apt upgrade -y
 sudo apt install -y bloodhound eyewitness chromium gedit enum4linux ldapscripts jq
 
 #eyewitness install
