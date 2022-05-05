@@ -50,6 +50,7 @@ sleep 1
 ### WAYBACK ###
 firefox "https://web.archive.org/web/*/$domain/*"&
 echo "Search wayback search for pwd bak skr pgp config psw inc mdb conf dat eml log"
+#github.com/tomnomnom/waybackurls waybackurls <target> | grep "\.js" 
 sleep 1
 
 
