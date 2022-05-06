@@ -13,6 +13,10 @@ sudo git clone https://github.com/FortyNorthSecurity/EyeWitness.git
 sudo /opt/EyeWitness/Python/setup/setup.sh
 #run with: /opt/EyeWitness/Python/EyeWitness.py -x nmap.xml --no-prompt --delay 10 -d eyewitness
 
+#Interlace install for multi threading commands
+sudo git clone https://github.com/codingo/Interlace /opt/Interlace
+sudo python3 /opt/Interlace/setup.py install
+
 #nmap-grep
 sudo git clone https://github.com/sirchsec/nmap-grep.git
 
