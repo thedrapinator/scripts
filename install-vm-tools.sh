@@ -17,10 +17,19 @@ sudo /opt/EyeWitness/Python/setup/setup.sh
 sudo git clone https://github.com/codingo/Interlace /opt/Interlace
 sudo python3 /opt/Interlace/setup.py install
 
+#Discover OSINT Tool
+sudo git clone https://github.com/leebaird/discover /opt/discover/
+#All scripts must be ran from this location.
+sudo chmod +x /opt/discover/update.sh
+cd /opt/discover
+sudo ./update.sh
+
 #nmap-grep
+cd /opt
 sudo git clone https://github.com/sirchsec/nmap-grep.git
 
 #xmltocsv
+cd /opt
 sudo git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git
 
 echo "COPY OVER SSH CONFIG AND CHANGE PROXYCHAINS CONFIG"
