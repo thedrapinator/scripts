@@ -48,8 +48,13 @@ cd $companypath/eyewitness
 # nmap-grep
 /opt/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed
 
-#nikto
+#Make results folder
 mkdir -p $companypath/nmap/results
+
+#SSLScan
+#while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
+
+#nikto
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
 
 #dirb
