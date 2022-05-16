@@ -1,5 +1,7 @@
 #!/bin/bash
 
+tools=~/tools
+
 echo "Enter project name"
 read -p 'Project Name: ' companyname
 
@@ -34,17 +36,17 @@ mkdir -p $companypath/nmap
 sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
-python3 /opt/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
+python3 ~/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 #python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
 mkdir -p $companypath/eyewitness
 cd $companypath/eyewitness
 #sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-/opt/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+$tools/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 # nmap-grep
-/opt/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed
+$tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed
 
 #Make results folder
 mkdir -p $companypath/nmap/results
