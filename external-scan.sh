@@ -64,5 +64,10 @@ mkdir -p $companypath/nmap/results
 
 #dirb
 #while read -r line; do dirb $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/dirb.txt
+#ffuf -w /usr/share/wordlists/dirb/common.txt -u $line/FUZZ -o ffuf-
+#ffuf -w web-urls.txt:TARGET -w /usr/share/wordlists/dirb/common.txt -u TARGET/FUZZ
+#interlace -tL <domain list> -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
+#interlace -tL $companypath/nmap/parsed/web-urls.txt -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
+
 
 echo "SCRIPT COMPLETED!!!"
