@@ -14,7 +14,7 @@ sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq
 
 #eyewitness install
 git clone https://github.com/FortyNorthSecurity/EyeWitness.git $install/Eyewitness
-$install/EyeWitness/Python/setup/setup.sh
+sudo $install/EyeWitness/Python/setup/setup.sh
 #run with: /opt/EyeWitness/Python/EyeWitness.py -x nmap.xml --no-prompt --delay 10 -d eyewitness
 
 #Interlace install for multi threading commands
