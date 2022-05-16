@@ -1,6 +1,8 @@
 #!/bin/bash
 
-tools=~/tools
+user='whoami'
+tools=/home/$user/tools
+scripts=/home/$user/scripts
 
 echo "Enter project name"
 read -p 'Project Name: ' companyname
@@ -34,9 +36,10 @@ END
 ### nmap scan ##
 mkdir -p $companypath/nmap
 sudo nmap -v -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
+sudo chown $user:$user $companypath/nmap/*
 
 ##Convert nmap scan to CSV for spreadsheet
-python3 ~/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
+python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 #python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
@@ -50,6 +53,8 @@ $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypat
 
 #Make results folder
 mkdir -p $companypath/nmap/results
+
+#GET INTERLACE WORKING
 
 #SSLScan
 #while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
