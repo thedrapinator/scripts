@@ -33,7 +33,7 @@ END
 
 ### nmap scan ##
 mkdir -p $companypath/nmap
-sudo nmap -vv -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
+sudo nmap -v -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
 python3 ~/scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
