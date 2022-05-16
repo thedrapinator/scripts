@@ -1,13 +1,11 @@
 #!/bin/bash
 
-echo "Enter company domain (ex. tesla.com)"
-read -p 'Domain: ' domain
+echo "Enter project name"
+read -p 'Project Name: ' companyname
 
 ### SET VARIABLES ###
-echo "Domain = $domain"
-companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
-companypath=/home/kali/projects/$companyname
+companypath=~/projects/$companyname
 echo "Files stored in $companypath"
 
 #make folder if it does not exist
@@ -15,7 +13,7 @@ mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
 sleep 1
-gedit $companypath/inscope.txt
+nano $companypath/inscope.txt
 
 # if inscope does not exist then exit
 if [ ! -f $companypath/inscope.txt ]
