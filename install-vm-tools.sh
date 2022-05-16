@@ -19,7 +19,7 @@ sudo $install/EyeWitness/Python/setup/setup.sh
 
 #Interlace install for multi threading commands
 git clone https://github.com/codingo/Interlace  $install/Interlace
-sudo python3  $install/Interlace/setup.py install
+sudo python3 $install/Interlace/setup.py install
 
 #Discover OSINT Tool
 git clone https://github.com/leebaird/discover $install/discover/
