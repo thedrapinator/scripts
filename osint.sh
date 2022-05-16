@@ -25,7 +25,7 @@ END
 #########################################
 
 ## Breach Database Emails
-curl -H "Authorization: apikey $api" https://pwnd.tiden.io/search\?domain\=$domain | jq -r '.[] | "\(.username):\(.password)"' > $companypath/breach.txt
+curl -H "Authorization: apikey $api" https://pwnd.tiden.io/search\?domain\=$domain | jq -r '.[] | "\(.username) \(.password)"' > $companypath/breach.txt
 cat $companypath/breach.txt | cut -d ":" -f1 > $companypath/emails_combined.txt
 
 #BreachDB Users
