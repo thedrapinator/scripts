@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Sudo command to prompt for sudo privs
+sudo echo 'SUDO PASSWORD CACHED'
+
 user='whoami'
 tools=/home/$user/tools
 scripts=/home/$user/scripts
@@ -17,7 +20,7 @@ mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
 sleep 1
-nano $companypath/inscope.txt
+gedit $companypath/inscope.txt
 
 # if inscope does not exist then exit
 if [ ! -f $companypath/inscope.txt ]
@@ -35,8 +38,8 @@ END
 
 ### nmap scan ##
 mkdir -p $companypath/nmap
-proxychains -q nmap -v -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
-#sudo chown $user:$user $companypath/nmap/*
+proxychains -q sudo nmap -v -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
+sudo chown $user:$user $companypath/nmap/*
 
 ##Convert nmap scan to CSV for spreadsheet
 python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
