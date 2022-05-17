@@ -15,7 +15,7 @@ mkdir -p $tools
 sudo apt update
 sudo apt reinstall libwacom-common -y
 #sudo apt upgrade -y
-sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq
+sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq parallel
 
 #eyewitness install
 git clone https://github.com/FortyNorthSecurity/EyeWitness.git $tools/Eyewitness
