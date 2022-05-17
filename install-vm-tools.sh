@@ -37,7 +37,7 @@ sudo ./update.sh
 git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
 
 #xmltocsv
-git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git  $tools/Nmap-Scan-to-CSV
+git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git $tools/Nmap-Scan-to-CSV
 
 echo "COPY OVER SSH CONFIG AND CHANGE PROXYCHAINS CONFIG"
 echo "MANUAL INSTALL FOXYPROXY AND WAPALIZER"
