@@ -7,6 +7,8 @@ user='whoami'
 tools=/home/$user/tools
 scripts=/home/$user/scripts
 
+chmod +x $scripts/*
+
 #make folder if it does not exist
 mkdir -p $tools
 
