@@ -59,6 +59,9 @@ mkdir -p $companypath/nmap/results
 
 #GET INTERLACE WORKING
 
+#Parallel example
+#cat websites.txt | parallel -j 16 dirb {} -f -o websites.dirb
+
 #SSLScan
 mkdir -p $companypath/nmap/results/sslscan
 #while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
