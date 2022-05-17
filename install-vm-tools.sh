@@ -14,7 +14,7 @@ mkdir -p $tools
 
 sudo apt update
 sudo apt reinstall libwacom-common -y
-sudo apt upgrade -y
+#sudo apt upgrade -y
 sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq
 
 #eyewitness install
