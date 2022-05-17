@@ -59,7 +59,7 @@ mkdir -p $companypath/nmap/results
 #SSLScan
 mkdir -p $companypath/nmap/results/sslscan
 #while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
-while read -r line; do proxychains -q sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
 
 #nikto
 mkdir -p $companypath/nmap/results/nikto
