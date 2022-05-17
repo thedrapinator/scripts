@@ -61,6 +61,8 @@ mkdir -p $companypath/nmap/results
 
 #Parallel example
 #cat websites.txt | parallel -j 16 dirb {} -f -o websites.dirb
+#parallel -a list.txt -j 10 echo {} ">" {}.log
+#parallel -a test -j 2 echo {}";" sleep 3
 
 #SSLScan
 mkdir -p $companypath/nmap/results/sslscan
