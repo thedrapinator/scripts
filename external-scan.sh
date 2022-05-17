@@ -63,11 +63,12 @@ mkdir -p $companypath/nmap/results
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
 
 #dirb
+mkdir -p $companypath/nmap/results/ffuf
 #while read -r line; do dirb $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/dirb.txt
 #ffuf -w /usr/share/wordlists/dirb/common.txt -u $line/FUZZ -o ffuf-
 #ffuf -w web-urls.txt:TARGET -w /usr/share/wordlists/dirb/common.txt -u TARGET/FUZZ
 #interlace -tL <domain list> -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
 #interlace -tL $companypath/nmap/parsed/web-urls.txt -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
-
+while read -r line; do ffuf -w /usr/share/wordlists/dirb/common.txt -u $line''FUZZ -maxtime-job 5 -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee $companypath/nmap/results/ffuf/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
 
 echo "SCRIPT COMPLETED!!!"
