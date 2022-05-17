@@ -29,7 +29,7 @@ sudo $tools/EyeWitness/Python/setup/setup.sh
 #Discover OSINT Tool
 git clone https://github.com/leebaird/discover $tools/discover/
 #All scripts must be ran from this location.
-sudo chmod +x  $tools/discover/update.sh
+sudo chmod +x $tools/discover/update.sh
 cd  $tools/discover
 sudo ./update.sh
 
