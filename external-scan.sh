@@ -3,7 +3,7 @@
 #Sudo command to prompt for sudo privs
 sudo echo 'SUDO PASSWORD CACHED'
 
-user='whoami'
+user=`whoami`
 tools=/home/$user/tools
 scripts=/home/$user/scripts
 
