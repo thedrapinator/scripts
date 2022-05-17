@@ -64,7 +64,7 @@ while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`ec
 #nikto
 mkdir -p $companypath/nmap/results/nikto
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
-while read -r line; do nikto -h $line | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+while read -r line; do nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
 
 #dirb
 mkdir -p $companypath/nmap/results/ffuf
