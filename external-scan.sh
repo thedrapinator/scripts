@@ -65,24 +65,32 @@ mkdir -p $companypath/nmap/results
 #parallel -a test -j 2 echo {}";" sleep 3
 
 #SSLScan
+echo "RUNNING SSL SCAN"
 mkdir -p $companypath/nmap/results/sslscan
+cd $companypath/nmap/results/sslscan
 #while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
-while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/https-hosts.txt
+#while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/https-hosts.txt
+parallel -a $companypath/nmap/parsed/https-hosts.txt --progress -j 10 "sslscan {} > {=s/\///g=}"
 
 #nikto
+echo "RUNNING NIKTO"
 mkdir -p $companypath/nmap/results/nikto
 cd $companypath/nmap/results/nikto
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
-while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
-parallel -a $companypath/nmap/parsed/web-urls.txt -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
+#while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+#parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q nikto -h {} -maxtime 1h > {=s/\///g=}"
 
-#dirb
+#ffuf
 mkdir -p $companypath/nmap/results/ffuf
+cd $companypath/nmap/results/ffuf
 #while read -r line; do dirb $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/dirb.txt
 #ffuf -w /usr/share/wordlists/dirb/common.txt -u $line/FUZZ -o ffuf-
 #ffuf -w web-urls.txt:TARGET -w /usr/share/wordlists/dirb/common.txt -u TARGET/FUZZ
 #interlace -tL <domain list> -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
 #interlace -tL $companypath/nmap/parsed/web-urls.txt -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
-while read -r line; do proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u $line''FUZZ -maxtime-job 3600 -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee $companypath/nmap/results/ffuf/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+#while read -r line; do proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u $line''FUZZ -maxtime-job 3600 -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee $companypath/nmap/results/ffuf/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u {}FUZZ -maxtime-job 3600 -se -sf -mc all -fc 300,301,302,303,500,400,404 > {=s/\///g=}"
+
 
 echo "SCRIPT COMPLETED!!!"
