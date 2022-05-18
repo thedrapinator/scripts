@@ -52,7 +52,7 @@ cd $companypath/eyewitness
 proxychains -q $tools/EyeWitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 # nmap-grep
-$tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed
+$tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
 #Make results folder
 mkdir -p $companypath/nmap/results
