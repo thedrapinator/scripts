@@ -38,7 +38,7 @@ END
 
 ### nmap scan ##
 mkdir -p $companypath/nmap
-proxychains -q sudo nmap -v -Pn -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
+proxychains -q sudo nmap -v -Pn -sV -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 sudo chown $user:$user $companypath/nmap/*
 
 ##Convert nmap scan to CSV for spreadsheet
