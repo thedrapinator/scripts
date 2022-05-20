@@ -49,7 +49,7 @@ python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap
 mkdir -p $companypath/eyewitness
 cd $companypath/eyewitness
 #sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-proxychains -q $tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 # nmap-grep
 $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
