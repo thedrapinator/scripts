@@ -63,6 +63,13 @@ mkdir -p $companypath/nmap/results
 #parallel -a list.txt -j 10 echo {} ">" {}.log
 #parallel -a test -j 2 echo {}";" sleep 3
 
+#DNSrecon
+echo "RUNNING DNS RECON"
+mkdir -p $companypath/nmap/results/dnsrecon
+cd $companypath/nmap/results/dnsrecon
+parallel -a $companypath/nmap/parsed/dns-tcp-hosts.txt --progress -j 10 "dnsrecon -d {} -t axfr > {=s/\///g=}"
+
+
 #SSLScan
 echo "RUNNING SSL SCAN"
 mkdir -p $companypath/nmap/results/sslscan
