@@ -37,8 +37,8 @@ python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap
 # eyewitness
 mkdir -p $companypath/eyewitness
 cd $companypath/eyewitness
-#sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+#COPY FROM REMOTE HOST FIRST
+#$tools/Eyewitness/Python/EyeWitness.py --proxy-ip 127.0.0.1 --proxy-port 8810 --proxy-type socks5 -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 # nmap-grep
 $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
