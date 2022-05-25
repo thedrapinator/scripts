@@ -1,22 +1,16 @@
 #!/bin/bash
 
-echo "Enter company folder name"
-read -p 'Company Name: ' companyname
+#Sudo command to prompt for sudo privs
+tools=/root/tools
+scripts=/root/scripts
 
 ### SET VARIABLES ###
-echo "Company Name = $companyname"
-companypath=~/projects/$companyname
-mkdir -p $companypath
+companypath=/root
 echo "Files stored in $companypath"
-cidr=`sed -z 's/\n/ -cidr /g' $companypath/inscope.txt | sed 's/.......$//g'`
-#echo $cidr
-
-#make folder if it does not exist
-mkdir -p $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
-sleep 3
-gedit $companypath/inscope.txt
+sleep 1
+nano $companypath/inscope.txt
 
 # if inscope does not exist then exit
 if [ ! -f $companypath/inscope.txt ]
@@ -34,32 +28,65 @@ END
 
 ### nmap scan ##
 mkdir -p $companypath/nmap
-nmap -vv -sV -O -iL $companypath/inscope.txt -oA $companypath/nmap/$companyname
+nmap -v -sV -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
 ##Convert nmap scan to CSV for spreadsheet
-python3 ~/scripts/xml2csv.py -f $companypath/nmap/$companyname.xml -csv $companypath/nmap/$companyname.csv
+python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
+#python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
-cd $companypath/
-eyewitness -x $companypath/nmap/$companyname.xml --no-prompt --delay 5 -d $companypath/eyewitness      
+mkdir -p $companypath/eyewitness
+cd $companypath/eyewitness
+#sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
-## DNS zone transfer attempt ## AUTORECON DOES THIS
-#cat $companyname.gnmap| grep 53/open | cut -d " " -f2 > $companypath/nmap/dns_servers.txt
-#nmap -p53 -sV -v --script=dns-zone-transfer.nse -iL $companypath/nmap/dns_servers.txt -oA $companypath/nmap/dns_zone_results
+# nmap-grep
+$tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
-### AUTORECON ###
-echo "STARTING AUTORECON!!!"
-mkdir -p $companypath/autorecon
-#cd $companypath/autorecon
-autorecon -t $companypath/inscope.txt -o $companypath/autorecon
+#Make results folder
+mkdir -p $companypath/nmap/results
 
-## Sort Results ###
+#GET INTERLACE WORKING
 
-#Sort zone transfers
-cd $companypath/autorecon
-touch zone_transfer_temp.txt
-find -name *zone-transfer* -exec cat {} \; | grep ^'\.' | cut -f7 >> zone_transfer_temp.txt 
-cat zone_transfer_temp.txt | sort -u > zone_transfer.txt
-rm zone_transfer_temp.txt
+#Parallel example
+#cat websites.txt | parallel -j 16 dirb {} -f -o websites.dirb
+#parallel -a list.txt -j 10 echo {} ">" {}.log
+#parallel -a test -j 2 echo {}";" sleep 3
+
+#DNSrecon
+echo "RUNNING DNS RECON"
+mkdir -p $companypath/nmap/results/dnsrecon
+cd $companypath/nmap/results/dnsrecon
+parallel -a $companypath/nmap/parsed/dns-tcp-hosts.txt --progress -j 10 "dnsrecon -d {} -t axfr > {=s/\///g=}"
+
+
+#SSLScan
+echo "RUNNING SSL SCAN"
+mkdir -p $companypath/nmap/results/sslscan
+cd $companypath/nmap/results/sslscan
+#while read -r line; do sslscan $line; done < $companypath/nmap/parsed/https-hosts.txt | tee $companypath/nmap/results/sslscan.txt
+#while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/https-hosts.txt
+parallel -a $companypath/nmap/parsed/https-hosts.txt --progress -j 10 "sslscan {} > {=s/\///g=}"
+
+#nikto
+echo "RUNNING NIKTO"
+mkdir -p $companypath/nmap/results/nikto
+cd $companypath/nmap/results/nikto
+#while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
+#while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+#parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nikto -h {} -maxtime 1h > {=s/\///g=}"
+
+#ffuf
+mkdir -p $companypath/nmap/results/ffuf
+cd $companypath/nmap/results/ffuf
+#while read -r line; do dirb $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/dirb.txt
+#ffuf -w /usr/share/wordlists/dirb/common.txt -u $line/FUZZ -o ffuf-
+#ffuf -w web-urls.txt:TARGET -w /usr/share/wordlists/dirb/common.txt -u TARGET/FUZZ
+#interlace -tL <domain list> -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
+#interlace -tL $companypath/nmap/parsed/web-urls.txt -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
+#while read -r line; do proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u $line''FUZZ -maxtime-job 3600 -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee $companypath/nmap/results/ffuf/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "ffuf -w /usr/share/wordlists/dirb/common.txt -u {}FUZZ -maxtime-job 3600 -noninteractive -se -sf -mc all -fc 300,301,302,303,500,400,404 > {=s/\///g=}"
+
 
 echo "SCRIPT COMPLETED!!!"
