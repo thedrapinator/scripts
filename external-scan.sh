@@ -49,19 +49,19 @@ python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap
 mkdir -p $companypath/eyewitness
 cd $companypath/eyewitness
 #sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+$tools/Eyewitness/Python/EyeWitness.py --proxy-ip 127.0.0.1 --proxy-port 8810 --proxy-type socks5 -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+#$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+
 # nmap-grep
 $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
 #Make results folder
 mkdir -p $companypath/nmap/results
 
-#GET INTERLACE WORKING
-
-#Parallel example
-#cat websites.txt | parallel -j 16 dirb {} -f -o websites.dirb
-#parallel -a list.txt -j 10 echo {} ">" {}.log
-#parallel -a test -j 2 echo {}";" sleep 3
+### Add Metasploit Scripts ###
+#copy metasploit rc file 
+#cd $companypath/nmap/parsed
+#msfconsole -r metasploit.rc
 
 #DNSrecon
 echo "RUNNING DNS RECON"
