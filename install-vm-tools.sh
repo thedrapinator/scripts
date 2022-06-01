@@ -3,6 +3,9 @@
 #Sudo command to prompt for sudo privs
 sudo echo 'SUDO PASSWORD CACHED'
 
+#Chromium password
+chromium
+
 ### Disable sleep mode
 sudo systemctl mask sleep.target suspend.target hibernate.target hybridsleep-target
 
@@ -24,8 +27,8 @@ sudo apt reinstall libwacom-common -y
 sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq parallel terminator seclists
 
 #eyewitness install
-git clone https://github.com/FortyNorthSecurity/EyeWitness.git $tools/Eyewitness
-sudo $tools/EyeWitness/Python/setup/setup.sh
+#git clone https://github.com/FortyNorthSecurity/EyeWitness.git $tools/Eyewitness
+#sudo $tools/EyeWitness/Python/setup/setup.sh
 #run with: /opt/EyeWitness/Python/EyeWitness.py -x nmap.xml --no-prompt --delay 10 -d eyewitness
 
 #Aquatone
