@@ -28,6 +28,11 @@ git clone https://github.com/FortyNorthSecurity/EyeWitness.git $tools/Eyewitness
 sudo $tools/EyeWitness/Python/setup/setup.sh
 #run with: /opt/EyeWitness/Python/EyeWitness.py -x nmap.xml --no-prompt --delay 10 -d eyewitness
 
+#Aquatone
+cd $tools
+wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
+unzip aquatone_linux_amd64_1.7.0.zip
+
 #Discover OSINT Tool
 git clone https://github.com/leebaird/discover $tools/discover/
 #All scripts must be ran from this location.
