@@ -52,6 +52,13 @@ cd $companypath/eyewitness
 $tools/Eyewitness/Python/EyeWitness.py --proxy-ip 127.0.0.1 --proxy-port 8810 --proxy-type socks5 -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 #$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
+# Aquatone
+mkdir -p $companypath/aquatone
+cd $companypath/aquatone
+cat $companypath/nmap/nmap.xml | $tools/aquatone -nmap -out $companypath/aquatone
+$tools/aquatone -nmap $companypath/nmap/nmap.xml -ports xlarge -out $companypath/aquatone 
+
+
 # nmap-grep
 $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
