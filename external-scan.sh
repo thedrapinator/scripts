@@ -85,6 +85,12 @@ cd $companypath/nmap/results/sslscan
 #while read -r line; do sslscan $line | tee $companypath/nmap/results/sslscan/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/https-hosts.txt
 parallel -a $companypath/nmap/parsed/https-hosts.txt --progress -j 10 "sslscan {} > {=s/\///g=}"
 
+#SSL Results
+cd $companypath/nmap/results/sslscan
+grep "vulnerable" * | grep -v "not" > vulnerable.txt #NEED TO CUT OUT IP IF RESULTS
+grep "enabled" * | grep "TLSv1.0" | cut -d ":" -f1 > tls10.txt
+grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
+
 #nikto
 echo "RUNNING NIKTO"
 mkdir -p $companypath/nmap/results/nikto
