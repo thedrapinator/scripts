@@ -13,7 +13,11 @@ echo "Domain = $domain"
 companyname=`echo $domain | cut -d "." -f1`
 echo "Company Name = $companyname"
 companypath=/home/kali/projects/$companyname/osint
+scripts=/home/kali/scripts
 echo "Files stored in $companypath"
+
+#Make scripts executable
+chmod +x $scripts/*
 
 #make folder if it does not exist
 mkdir -p $companypath
@@ -35,8 +39,9 @@ sort -u $companypath/possible_breach_tmp.txt > $companypath/possible_breach_user
 rm $companypath/possible_breach_tmp.txt
 
 ##Create Password Spray List
-awk -F" " '!seen[$1]++' $companypath/breach.txt > spray1.txt. # first unique cred
-awk -F" " 'a[$1]++' $companypath/spray1.txt > spray2.txt # duplicates
+mkdir -p $companypath/spray
+cd $companypath/spray
+$scripts/credparse.sh $companypath/breach.txt
 
 ### GOOGLE DORKING #####
 echo "LAUNCHING BROWSER!"
