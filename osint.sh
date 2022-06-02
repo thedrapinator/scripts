@@ -34,6 +34,10 @@ cat $companypath/breach.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*
 sort -u $companypath/possible_breach_tmp.txt > $companypath/possible_breach_users.txt
 rm $companypath/possible_breach_tmp.txt
 
+##Create Password Spray List
+awk -F" " '!seen[$1]++' $companypath/breach.txt > spray1.txt. # first unique cred
+awk -F" " 'a[$1]++' $companypath/spray1.txt > spray2.txt # duplicates
+
 ### GOOGLE DORKING #####
 echo "LAUNCHING BROWSER!"
 firefox "https://www.google.com/search?q=site:$domain ext:pwd OR ext:bak OR ext:skr OR ext:pgp OR ext:config OR ext:psw OR ext:inc OR ext:mdb OR ext:conf OR ext:dat OR ext:eml OR ext:log"&
