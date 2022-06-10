@@ -43,6 +43,9 @@ sudo chmod +x $tools/discover/update.sh
 cd  $tools/discover
 sudo ./update.sh
 
+#SSH SCan
+git clone https://github.com/evict/SSHScan $tools/SSHScan
+
 #nmap-grep
 git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
 
