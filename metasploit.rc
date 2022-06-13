@@ -1,0 +1,702 @@
+
+mkdir logs
+setg verbose true
+setg timestampoutput true
+
+#FTP tests (version/banner grab, anonymous login, default logins)
+
+spool logs/log.ftp.version
+set prompt %grn%T
+use auxiliary/scanner/ftp/ftp_version
+set RHOSTS file:ftp-hosts.txt
+set threads 1
+date
+run
+spool off
+
+spool logs/log.ftp.anon
+use auxiliary/scanner/ftp/anonymous
+set RHOSTS file:ftp-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.ftp.login.admin
+use auxiliary/scanner/ftp/ftp_login
+set RHOSTS file:ftp-hosts.txt
+set threads 1
+set username admin
+set password admin
+run
+spool off
+
+spool logs/log.ftp.login.root
+use auxiliary/scanner/ftp/ftp_login
+set RHOSTS file:ftp-hosts.txt
+set threads 1
+set username root
+set username root
+run
+spool off
+
+#Telnet tests (version/banner grab, default logins)
+
+spool logs/log.telnet.version
+use auxiliary/scanner/telnet/telnet_version
+set RHOSTS file:telnet-hosts.txt
+set threads 1
+set timeout 5
+run
+spool off
+
+spool logs/log.telnet.login.admin
+use auxiliary/scanner/telnet/telnet_login
+set RHOSTS file:telnet-hosts.txt
+set threads 1
+set timeout 5
+set username admin
+set password admin
+run
+spool off
+
+spool logs/log.telnet.login.root
+use auxiliary/scanner/telnet/telnet_login
+set RHOSTS file:telnet-hosts.txt
+set threads 1
+set timeout 5
+set username root
+set password root
+run
+spool off
+
+spool logs/log.telnet.login.cisco
+use auxiliary/scanner/telnet/telnet_login
+set RHOSTS file:telnet-hosts.txt
+set threads 1
+set timeout 5
+set username cisco
+set password cisco
+run
+spool off
+
+#SSH banner grabs
+
+spool logs/log.ssh.version
+use auxiliary/scanner/ssh/ssh_version
+set RHOSTS file:ssh-hosts.txt
+set threads 1
+set timeout 5
+run
+spool off
+
+#SMB Enumeration Checks
+
+spool logs/log.smb.version
+use auxiliary/scanner/smb/smb_version
+setg RHOSTS file:smb-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.smb.ms17
+use auxiliary/scanner/smb/smb_ms17_010
+set RHOSTS file:smb-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.smb.enumshares
+use auxiliary/scanner/smb/smb_enumshares
+set RHOSTS file:smb-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.smb.enumusers
+use auxiliary/scanner/smb/smb_enumusers
+set RHOSTS file:smb-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.smb.pipes
+use auxiliary/scanner/smb/pipe_auditor
+set RHOSTS file:smb-hosts.txt
+set threads 1
+run
+spool off
+
+#RDP BlueKeep scan
+
+spool logs/log.rdp.bluekeep
+use auxiliary/scanner/rdp/cve_2019_0708_bluekeep
+setg RHOSTS file:rdp-hosts.txt
+set threads 1
+run
+spool off
+
+#IPMI enumeration, cipher zero check, and hashdump
+
+spool logs/log.ipmi.version
+use auxiliary/scanner/ipmi/ipmi_version
+set RHOSTS file:623-udp-hosts.txt
+run
+spool off
+
+spool logs/log.ipmi.cipherzero
+use auxiliary/scanner/ipmi/ipmi_cipher_zero
+set RHOSTS file:623-udp-hosts.txt
+run
+spool off
+
+spool logs/log.ipmi.dumphashes
+use auxiliary/scanner/ipmi/ipmi_dumphashes
+set RHOSTS file:623-udp-hosts.txt
+set threads 1
+run
+spool off
+
+#MS-SQL enumeration
+
+spool logs/log.mssql.ping
+use auxiliary/scanner/mssql/mssql_ping
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.mssql.login
+use auxiliary/scanner/mssql/mssql_login
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
+spool logs/log.mssql.schema
+use auxiliary/scanner/mssql/mssql_schemadump
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
+spool logs/log.mssql.hashdump
+use auxiliary/scanner/mssql/mssql_hashdump
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
+#SNMP checks
+
+spool logs/log.snmp.login
+use auxiliary/scanner/snmp/snmp_login
+set RHOSTS file:snmp-hosts.txt
+set version all
+run
+spool off
+
+spool logs/log.snmp.hp.enum.v1
+use auxiliary/scanner/snmp/snmp_enum_hp_laserjet
+set RHOSTS file:snmp-hosts.txt
+set threads 1
+set version 1
+run 
+spool off
+
+spool logs/log.snmp.hp.enum.v2c
+use auxiliary/scanner/snmp/snmp_enum_hp_laserjet
+set RHOSTS file:snmp-hosts.txt
+set threads 1
+set version 2c
+run
+spool off
+
+spool logs/log.snmp.cisco.config.tftp.v1.public
+use auxiliary/scanner/snmp/cisco_config_tftp
+set RHOSTS file:snmp-hosts.txt
+set community public
+set threads 1
+set version 1
+run
+spool off
+
+spool logs/log.snmp.cisco.config.tftp.v2c.public
+use auxiliary/scanner/snmp/cisco_config_tftp
+set RHOSTS file:snmp-hosts.txt
+set community public
+set threads 1
+set version 2c
+run
+spool off
+
+spool logs/log.snmp.cisco.config.tftp.v1.private
+use auxiliary/scanner/snmp/cisco_config_tftp
+set RHOSTS file:snmp-hosts.txt
+set community private
+set threads 1
+set version 1
+run
+spool off
+
+spool logs/log.snmp.cisco.config.tftp.v2c.private
+use auxiliary/scanner/snmp/cisco_config_tftp
+set RHOSTS file:snmp-hosts.txt
+set community private
+set threads 1
+set version 2c
+run
+spool off
+
+spool logs/log.snmp.xerox.enum.users.v1.public
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+set RHOSTS file:snmp-hosts.txt
+set community public
+set threads 1
+set version 1
+run
+spool off
+
+spool logs/log.snmp.xerox.enum.users.v2.public
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+set RHOSTS file:snmp-hosts.txt
+set community public
+set threads 1
+set version 2c
+run
+spool off
+
+spool logs/login.snmp.xerox.enum.users.v1.private
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+set RHOSTS file:snmp-hosts.txt
+set community private
+set threads 1
+set version 1
+run
+spool off
+
+spool logs/login.snmp.xerox.enum.users.v2c.private
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+set RHOSTS file:snmp-hosts.txt
+set community private
+set threads 1
+set version 2c
+run
+spool off
+
+#VNC 
+
+spool logs/log.vnc.noneauth
+use auxiliary/scanner/vnc/vnc_none_auth
+set RHOSTS file:5900-tcp-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.vnc.noneauth
+use auxiliary/scanner/vnc/vnc_none_auth
+set RHOSTS file:5800-tcp-hosts.txt
+set threads 1
+set rport 5800
+run
+spool off
+
+#Network File Shares (NSF)
+
+spool logs/log.nfs.mount.udp
+use auxiliary/scanner/nfs/nfsmount
+set RHOSTS file:111-udp-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.nfs.mount.tcp
+set RHOSTS file:111-tcp-hosts.txt
+set protocol tcp
+set threads 1
+run
+spool off
+
+#X11
+
+spool logs/log.x11.openx11
+use auxiliary/scanner/x11/open_x11
+set RHOSTS file:6000-tcp-hosts.txt
+set threads 1
+run
+set rport 6001
+set RHOSTS file:6001-tcp-hosts.txt
+run
+set rport 6002
+set RHOSTS file:6002-tcp-hosts.txt
+run
+set rport 6003
+set RHOSTS file:6003-tcp-hosts.txt
+run
+set rport 6004
+set RHOSTS file:6004-tcp-hosts.txt
+run
+set rport 6005
+set RHOSTS file:6005-tcp-hosts.txt
+run
+set rport 6006
+set RHOSTS file:6006-tcp-hosts.txt
+run
+set rport 6007
+set RHOSTS file:6007-tcp-hosts.txt
+run
+set rport 6008
+set RHOSTS file:6008-tcp-hosts.txt
+run
+set rport 6009
+set RHOSTS file:6009-tcp-hosts.txt
+run
+set rport 6010
+set RHOSTS file:6010-tcp-hosts.txt
+run
+set rport 6011
+set RHOSTS file:6011-tcp-hosts.txt
+run
+set rport 6012
+set RHOSTS file:6012-tcp-hosts.txt
+run
+set rport 6013
+set RHOSTS file:6013-tcp-hosts.txt
+run
+set rport 6014
+set RHOSTS file:6014-tcp-hosts.txt
+run
+set rport 6015
+set RHOSTS file:6015-tcp-hosts.txt
+run
+set rport 6016
+set RHOSTS file:6016-tcp-hosts.txt
+run
+set rport 6017
+set RHOSTS file:6017-tcp-hosts.txt
+run
+set rport 6018
+set RHOSTS file:6018-tcp-hosts.txt
+run
+set rport 6019
+set RHOSTS file:6019-tcp-hosts.txt
+run
+set rport 6020
+set RHOSTS file:6020-tcp-hosts.txt
+run
+set rport 6021
+set RHOSTS file:6021-tcp-hosts.txt
+run
+set rport 6022
+set RHOSTS file:6022-tcp-hosts.txt
+run
+set rport 6023
+set RHOSTS file:6023-tcp-hosts.txt
+run
+set rport 6024
+set RHOSTS file:6024-tcp-hosts.txt
+run
+set rport 6025
+set RHOSTS file:6025-tcp-hosts.txt
+run
+set rport 6026
+set RHOSTS file:6026-tcp-hosts.txt
+run
+set rport 6027
+set RHOSTS file:6027-tcp-hosts.txt
+run
+set rport 6028
+set RHOSTS file:6028-tcp-hosts.txt
+run
+set rport 6029
+set RHOSTS file:6029-tcp-hosts.txt
+run
+set rport 6030
+set RHOSTS file:6030-tcp-hosts.txt
+run
+set rport 6031
+set RHOSTS file:6031-tcp-hosts.txt
+run
+set rport 6032
+set RHOSTS file:6032-tcp-hosts.txt
+run
+set rport 6033
+set RHOSTS file:6033-tcp-hosts.txt
+run
+set rport 6034
+set RHOSTS file:6034-tcp-hosts.txt
+run
+set rport 6035
+set RHOSTS file:6035-tcp-hosts.txt
+run
+set rport 6036
+set RHOSTS file:6036-tcp-hosts.txt
+run
+set rport 6037
+set RHOSTS file:6037-tcp-hosts.txt
+run
+set rport 6038
+set RHOSTS file:6038-tcp-hosts.txt
+run
+set rport 6039
+set RHOSTS file:6039-tcp-hosts.txt
+run
+set rport 6040
+set RHOSTS file:6040-tcp-hosts.txt
+run
+set rport 6041
+set RHOSTS file:6041-tcp-hosts.txt
+run
+set rport 6042
+set RHOSTS file:6042-tcp-hosts.txt
+run
+set rport 6043
+set RHOSTS file:6043-tcp-hosts.txt
+run
+set rport 6044
+set RHOSTS file:6044-tcp-hosts.txt
+run
+set rport 6045
+set RHOSTS file:6045-tcp-hosts.txt
+run
+set rport 6046
+set RHOSTS file:6046-tcp-hosts.txt
+run
+set rport 6047
+set RHOSTS file:6047-tcp-hosts.txt
+run
+set rport 6048
+set RHOSTS file:6048-tcp-hosts.txt
+run
+set rport 6049
+set RHOSTS file:6049-tcp-hosts.txt
+run
+set rport 6050
+set RHOSTS file:6050-tcp-hosts.txt
+run
+set rport 6051
+set RHOSTS file:6051-tcp-hosts.txt
+run
+set rport 6052
+set RHOSTS file:6052-tcp-hosts.txt
+run
+set rport 6053
+set RHOSTS file:6053-tcp-hosts.txt
+run
+set rport 6054
+set RHOSTS file:6054-tcp-hosts.txt
+run
+set rport 6055
+set RHOSTS file:6055-tcp-hosts.txt
+run
+set rport 6056
+set RHOSTS file:6056-tcp-hosts.txt
+run
+set rport 6057
+set RHOSTS file:6057-tcp-hosts.txt
+run
+set rport 6058
+set RHOSTS file:6058-tcp-hosts.txt
+run
+set rport 6059
+set RHOSTS file:6059-tcp-hosts.txt
+run
+set rport 6060
+set RHOSTS file:6060-tcp-hosts.txt
+run
+set rport 6061
+set RHOSTS file:6061-tcp-hosts.txt
+run
+set rport 6062
+set RHOSTS file:6062-tcp-hosts.txt
+run
+set rport 6063
+set RHOSTS file:6063-tcp-hosts.txt
+run
+spool off
+
+#PostgreSQL
+
+use auxiliary/scanner/postgres/postgres_version
+setg RHOSTS file:postgresql-hosts.txt
+spool logs/log.postgresql.version
+set threads 1
+run
+spool off
+
+spool logs/log.postgresql.login
+use auxiliary/scanner/postgres/postgres_login
+set RHOSTS file:postgresql-hosts.txt
+set threads 1
+set username postgres
+set password postgres
+run
+spool off
+
+use auxiliary/scanner/postgres/postgres_hashdump
+spool logs/log.postgresql.hashdump
+set RHOSTS file:postgresql-hosts.txt
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/postgres/postgres_schemadump
+spool logs/log.postgresql.schemadump
+set RHOSTS file:postgresql-hosts.txt
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/postgres/postgres_dbname_flag_injection
+spool logs/log.postgresql.injection
+set RHOSTS file:postgresql-hosts.txt
+set threads 1
+run
+spool off
+
+#NetBios Enumeration
+
+use auxiliary/scanner/netbios/nbname
+spool logs/log.netbios.nbname
+set RHOSTS file:137-udp-hosts.txt
+run
+spool off
+
+#SSL Checks
+
+use auxiliary/scanner/ssl/openssl_heartbleed
+spool logs/log.ssl.heartbleed.v1.0
+set RHOSTS file:https-hosts.txt
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/ssl/openssl_heartbleed
+spool logs/log.ssl.heartbleed.v1.1
+set RHOSTS file:https-host.txt
+set tls_version 1.1
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/ssl/openssl_heartbleed
+spool logs/log.ssl.heartbleed.v1.2
+set RHOSTS file:https-hosts.txt
+set tls_version 1.2
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/ssl/openssl_heartbleed
+spool logs/log.ssl.heartbleed.sslv3
+set RHOSTS file:https-hosts.txt
+set tls_version SSLv3
+set threads 1
+run
+spool off
+
+#WebDav
+
+use auxiliary/scanner/http/webdav_scanner
+spool logs/log.http.webdav
+set RHOSTS file:http-hosts.txt
+set threads 1
+run
+spool off
+
+use auxiliary/scanner/http/webdav_scanner
+spool logs/log.https.webdav
+set RHOSTS file:https-hosts.txt
+set threads 1
+set rport 443
+set ssl true
+run
+spool off
+
+#SunRPC Port Mapping
+
+use auxiliary/scanner/misc/sunrpc_portmapper
+spool logs/log.rpc.sunrpc_portmapper
+set RHOSTS file:111-tcp-hosts.txt
+set rport 111
+run
+spool off
+
+#MySQL 
+
+use auxiliary/scanner/mysql/mysql_version
+spool logs/log.mysql.version
+set RHOSTS file:3306-tcp-hosts.txt
+set RPORT 3306
+run
+spool off
+
+use auxiliary/scanner/mysql/mysql_hashdump
+spool logs/log.mysql.hashdump.no-auth
+set RHOSTS file:3306-tcp-hosts.txt
+set RPORT 3306
+run
+spool off
+spool logs/log.mysql.hashdump.default
+set USERNAME root
+run
+spool off
+
+use auxiliary/scanner/mysql/mysql_authbypass_hashdump
+spool logs/log.mysql.authbypass
+set RHOSTS file:3306-tcp-hosts.txt
+set RPORT 3306
+run
+spool off
+
+use auxiliary/scanner/mysql/mysql_schemadump
+spool logs/log.mysql.schemadump
+set RHOSTS file:3306-tcp-hosts.txt
+set RPORT 3306
+run
+spool off
+
+# Check for rlogin (only 7 usernames attempted by default)
+
+use auxiliary/scanner/rservices/rlogin_login
+spool logs/log.rlogin.login.admin
+set RHOSTS file:rlogin-hosts.txt
+set RPORT 513
+set username admin
+set password admin
+run
+spool off
+
+use auxiliary/scanner/rservices/rlogin_login
+spool logs/log.rlogin.login.root
+set RHOSTS file:rlogin-hosts.txt
+set RPORT 513
+set username root
+set password root
+run
+spool off
+
+# TFTP file enumeration
+
+use auxiliary/scanner/tftp/tftpbrute
+spool logs/log.tfpt.filenum
+set RHOSTS file:tftp-hosts.txt
+set RPORT 69
+run
+spool off
+
+#Rsync file share enumeration
+
+use auxiliary/scanner/rsync/modules_list
+spool logs/log.rsync.modules_list
+set RHOSTS file:rsync-hosts.txt
+set RPORT 873
+run
+spool off
+
+exit
