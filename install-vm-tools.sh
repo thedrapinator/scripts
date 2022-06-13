@@ -52,8 +52,8 @@ git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
 #xmltocsv
 git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git $tools/Nmap-Scan-to-CSV
 
+echo "CHANGE DNS SERVERS IN /etc/resolv.conf"
 echo "COPY OVER SSH CONFIG AND CHANGE PROXYCHAINS CONFIG"
-echo "MANUAL INSTALL FOXYPROXY AND WAPALIZER"
-echo "DISABLE SLEEP"
 echo "SET PROXYCHAINS TO SOCKS 5 8810 AND SSH DYNAMIC FORWARD"
-echo "CHANGE TRANSPARENCY IN TERMINAL"
+echo "MANUAL INSTALL FOXYPROXY AND WAPALIZER"
+echo "CHANGE TRANSPARENCY IN TERMINATOR"
