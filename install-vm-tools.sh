@@ -4,7 +4,7 @@
 sudo echo 'SUDO PASSWORD CACHED'
 
 #Chromium password
-chromium
+#chromium
 
 ### Disable sleep mode
 sudo systemctl mask sleep.target suspend.target hibernate.target hybridsleep-target
