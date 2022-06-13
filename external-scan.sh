@@ -46,11 +46,11 @@ python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap
 #python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 
 # eyewitness
-mkdir -p $companypath/eyewitness
-cd $companypath/eyewitness
-#sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-$tools/Eyewitness/Python/EyeWitness.py --proxy-ip 127.0.0.1 --proxy-port 8810 --proxy-type socks5 -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
-#$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+#mkdir -p $companypath/eyewitness
+#cd $companypath/eyewitness
+####sudo eyewitness -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+#$tools/Eyewitness/Python/EyeWitness.py --proxy-ip 127.0.0.1 --proxy-port 8810 --proxy-type socks5 -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
+####$tools/Eyewitness/Python/EyeWitness.py -x $companypath/nmap/nmap.xml --no-prompt --delay 10 -d $companypath/eyewitness
 
 # Aquatone
 mkdir -p $companypath/aquatone
@@ -62,13 +62,14 @@ $tools/aquatone -nmap $companypath/nmap/nmap.xml -ports xlarge -out $companypath
 # nmap-grep
 $tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
 
-#Make results folder
-mkdir -p $companypath/nmap/results
 
 ### Add Metasploit Scripts ###
-#copy metasploit rc file 
-#cd $companypath/nmap/parsed
-#msfconsole -r metasploit.rc
+#copy metasploit rc file
+cd $companypath/nmap/parsed
+msfconsole -r $scripts/metasploit.rc
+
+#Make results folder
+mkdir -p $companypath/nmap/results
 
 #DNSrecon
 echo "RUNNING DNS RECON"
