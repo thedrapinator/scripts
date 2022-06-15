@@ -102,6 +102,19 @@ cd $companypath/nmap/results/nikto
 #parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
 parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q nikto -h {} -maxtime 1h > {=s/\///g=}"
 
+#Nikto Grep Vulns
+cd $companypath/nmap/results/nikto
+grep -i 'real ip' http* > ip-in-header.txt  #Internal IP in Header
+grep -i 'ip address found' http* >> ip-in-header.txt
+grep -i 'outdated' http* > outdated-software.txt
+grep -i 'interesting' http* > interesting.txt
+grep -i 'indexing' http* >> interesting.txt
+
+grep -i 'OSVBD' http* > osvdb.log
+grep -i 'RFC' http* > rfc.log
+grep -i 'vulnerable' http* > vulnerable.log
+
+
 #ffuf
 mkdir -p $companypath/nmap/results/ffuf
 cd $companypath/nmap/results/ffuf
