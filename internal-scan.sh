@@ -9,10 +9,6 @@ echo "Files stored in $companypath"
 #make folder if it does not exist
 mkdir -p $companypath
 
-echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
-sleep 1
-gedit $companypath/inscope.txt
-
 # if inscope does not exist then exit
 if [ ! -f $companypath/inscope.txt ]
 then
