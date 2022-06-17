@@ -14,12 +14,17 @@ mkdir -p $tools
 
 #Install tools
 sudo apt update
-sudo apt install -y enum4linux ldapscripts jq parallel seclists
+sudo apt install -y enum4linux ldapscripts jq parallel seclists bloodhound
 
 #Aquatone
 cd $tools
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 unzip aquatone_linux_amd64_1.7.0.zip
+
+#Bloodhound python
+git clone https://github.com/fox-it/BloodHound.py $tools/Bloodhound.py
+cd $tools/Bloodhound.py
+python3 setup.py install
 
 #SSH SCan
 git clone https://github.com/evict/SSHScan $tools/SSHScan
