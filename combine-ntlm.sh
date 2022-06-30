@@ -2,7 +2,7 @@
 
 # Usage: combine-ntlm.sh ntds.dit cracked.txt
 
-#Get Uerlist of cracked hashes
+#Get Userlist of cracked hashes
 while read -r line; do grep `echo $line | cut -d ":" -f1` $1; echo $line|cut -d ":" -f2; done < $2 | grep ::: | cut -d '\' -f2 | cut -d : -f1 > CRACKED-USERLIST.txt
 
 #Password matching for pipal analysis
