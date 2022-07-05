@@ -40,6 +40,9 @@ git clone https://github.com/dirkjanm/mitm6 $tools/mitm6
 cd $tools/mitm6
 python3 setup.py install
 
+#noPac
+git clone https://github.com/Ridter/noPac $tools/noPac
+
 #PetitPotam
 git clone https://github.com/topotam/PetitPotam $tools/PetitPotam
 cd $tools/PetitPotam
