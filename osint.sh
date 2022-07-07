@@ -51,7 +51,7 @@ firefox "https://www.google.com/search?q=site:$domain inurl:'htaccess' OR inurl:
 sleep 1
 firefox "https://www.google.com/search?q=site:$domain intitle:'Index of' OR intitle:'index.of'"&
 sleep 1
-firefox "https://www.google.com/search?q=site:$domain (ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt OR ext:ps OR ext:rtf OR ext:odt OR ext:sxw OR ext:psw OR ext:ppt OR ext:pps OR ext:xml) 'username * password'"&
+firefox "https://www.google.com/search?q=site:$domain (ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt OR ext:ps OR ext:rtf OR ext:odt OR ext:sxw OR ext:psw OR ext:ppt OR ext:pps OR ext:xml) 'username password'"&
 sleep 1
 ### ROBOTS ###
 firefox "$domain/robots.txt"&
