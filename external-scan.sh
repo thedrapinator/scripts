@@ -72,6 +72,13 @@ msfconsole -r $scripts/metasploit.rc
 #Make results folder
 mkdir -p $companypath/nmap/results
 
+##########
+
+#Check security headers on URLs in scope
+#./shcheck [Target URL]
+
+#################
+
 #DNSrecon
 echo "RUNNING DNS RECON"
 mkdir -p $companypath/nmap/results/dnsrecon
