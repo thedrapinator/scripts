@@ -36,10 +36,20 @@ fi
 END
 #########################################
 
+### metasploit nmap scan ##
+mkdir -p $companypath/nmap
+nmap -v -sSU -iL $companypath/inscope.txt -Pn -p U:53,111,161,500,623,2049,1000,T:21,22,23,25,53,80,81,110,111,123,137-139,161,389,443,445,500,512,513,548,623-624,1099,1241,1433-1434,1521,2049,2483-2484,3306,3389,4333,4786,4848,5432,5800,5900,5901,6000,6001,7001,8000,8080,8181,8443,16992-16993,27017,32764 -oA $companypath/nmap/initial
+
+# nmap-grep
+$tools/nmap-grep/nmap-grep.sh $companypath/nmap/initial.gnmap --out-dir $companypath/nmap/parsed --no-summary
+
+### Add Metasploit Scripts ###
+cd $companypath/nmap/parsed
+msfconsole -r $scripts/metasploit.rc
+
 ### nmap scan ##
 mkdir -p $companypath/nmap
-#proxychains -q sudo nmap -v -Pn -sV -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
-scp pso203:$companypath/nmap/* $companypath/nmap/*
+sudo nmap -v -Pn -sV -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 sudo chown $user:$user $companypath/nmap/*
 
 ##Convert nmap scan to CSV for spreadsheet
@@ -58,16 +68,6 @@ mkdir -p $companypath/aquatone
 cd $companypath/aquatone
 cat $companypath/nmap/nmap.xml | $tools/aquatone -nmap -out $companypath/aquatone
 #$tools/aquatone -nmap $companypath/nmap/nmap.xml -ports xlarge -out $companypath/aquatone 
-
-
-# nmap-grep
-$tools/nmap-grep/nmap-grep.sh $companypath/nmap/nmap.gnmap --out-dir $companypath/nmap/parsed --no-summary
-
-
-### Add Metasploit Scripts ###
-#copy metasploit rc file
-cd $companypath/nmap/parsed
-msfconsole -r $scripts/metasploit.rc
 
 #Make results folder
 mkdir -p $companypath/nmap/results
