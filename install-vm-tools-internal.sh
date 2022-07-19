@@ -21,6 +21,11 @@ cd $tools
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip
 unzip aquatone_linux_amd64_1.7.0.zip
 
+#Kerbrute
+cd $tools
+wget https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_linux_amd64
+chmod +x kerbrute_linux_amd64
+
 #Bloodhound python
 git clone https://github.com/fox-it/BloodHound.py $tools/Bloodhound.py
 cd $tools/Bloodhound.py
