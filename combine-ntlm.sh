@@ -14,7 +14,7 @@
 #rm tmp.ntds.users.txt
 
 cat $2 | cut -d : -f2 > tmp.pass.txt
-cat $1 | grep ::: | cut -d ' ' -f26  > tmp.ntds.txt.  #Do a rev and make more accurate
+cat $1 | grep ::: | cut -d ' ' -f26  > tmp.ntds.txt  #Do a rev and make more accurate
 john tmp.ntds.txt --wordlist=tmp.pass.txt --format=NT
 john tmp.ntds.txt --format=NT --show | cut -d : -f1,2 > COMBINED.txt
 
