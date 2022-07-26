@@ -14,7 +14,7 @@ mkdir -p $tools
 
 #Install tools
 sudo apt update
-sudo apt install -y enum4linux ldapscripts jq parallel seclists bloodhound
+sudo apt install -y enum4linux ldapscripts jq parallel seclists #bloodhound
 
 #Aquatone
 cd $tools
