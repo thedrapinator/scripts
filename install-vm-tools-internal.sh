@@ -9,18 +9,18 @@ scripts=~/scripts
 #Make executable
 chmod +x $scripts/*
 
-#Python virtual env
-cd ~
-sudo apt install python3-venv #python3.10-venv
-python3 -m venv env
-source env/bin/activate
-
 #make folder if it does not exist
 mkdir -p $tools
 
 #Install tools
 sudo apt update
 sudo apt install -y enum4linux ldapscripts jq parallel seclists #bloodhound
+
+#Python virtual env
+cd ~
+sudo apt install python3-venv #python3.10-venv
+python3 -m venv env
+source env/bin/activate
 
 #Aquatone
 cd $tools
