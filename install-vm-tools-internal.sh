@@ -11,7 +11,7 @@ chmod +x $scripts/*
 
 #Python virtual env
 cd ~
-sudo apt install python3.10-venv
+sudo apt install python3-venv #python3.10-venv
 python3 -m venv env
 source env/bin/activate
 
