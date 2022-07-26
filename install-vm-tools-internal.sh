@@ -29,7 +29,7 @@ chmod +x kerbrute_linux_amd64
 #Bloodhound python
 git clone https://github.com/fox-it/BloodHound.py $tools/Bloodhound.py
 cd $tools/Bloodhound.py
-python3 setup.py install
+#python3 setup.py install
 
 #SSH SCan
 git clone https://github.com/evict/SSHScan $tools/SSHScan
@@ -43,7 +43,7 @@ git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git $tools/Nmap-Scan-t
 #Mitm6
 git clone https://github.com/dirkjanm/mitm6 $tools/mitm6
 cd $tools/mitm6
-python3 setup.py install
+#python3 setup.py install
 
 #noPac
 git clone https://github.com/Ridter/noPac $tools/noPac
@@ -51,12 +51,12 @@ git clone https://github.com/Ridter/noPac $tools/noPac
 #PetitPotam
 git clone https://github.com/topotam/PetitPotam $tools/PetitPotam
 cd $tools/PetitPotam
-python3 setup.py install
+#python3 setup.py install
 
 #Certipy
 git clone https://github.com/ly4k/Certipy $tools/Certipy
 cd $tools/Certipy
-python3 setup.py install
+#python3 setup.py install
 
 echo "CHANGE PROXYCHAINS CONFIG"
 echo "SET PROXYCHAINS TO SOCKS 5 8810"
