@@ -9,6 +9,12 @@ scripts=~/scripts
 #Make executable
 chmod +x $scripts/*
 
+#Python virtual env
+cd ~
+sudo apt install python3.10-venv
+python3 -m venv env
+source env/bin/activate
+
 #make folder if it does not exist
 mkdir -p $tools
 
@@ -57,6 +63,9 @@ cd $tools/PetitPotam
 git clone https://github.com/ly4k/Certipy $tools/Certipy
 cd $tools/Certipy
 #python3 setup.py install
+
+#Deactiveate Python virtual env
+deactivate
 
 echo "CHANGE PROXYCHAINS CONFIG"
 echo "SET PROXYCHAINS TO SOCKS 5 8810"
