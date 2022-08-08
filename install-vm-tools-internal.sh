@@ -19,8 +19,8 @@ sudo apt install -y enum4linux ldapscripts jq parallel seclists #bloodhound
 #Python virtual env
 cd ~
 sudo apt install python3-venv #python3.10-venv
-python3 -m venv env
-source env/bin/activate
+#python3 -m venv env
+#source env/bin/activate
 
 #Aquatone
 cd $tools
@@ -65,9 +65,9 @@ cd $tools/Certipy
 #python3 setup.py install
 
 #Deactiveate Python virtual env
-deactivate
+#deactivate
 
 echo "CHANGE PROXYCHAINS CONFIG"
 echo "SET PROXYCHAINS TO SOCKS 5 8810"
 echo "CHANGE TRANSPARENCY IN TERMINATOR AND ENABLE INFINITE SCROLL"
-echo "CHANGE CME CONFIG FROM PWNED to ADMINISTRATOR ACCESS"
+echo "CHANGE CME CONFIG FROM PWNED to ADMIN"
