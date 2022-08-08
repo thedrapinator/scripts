@@ -18,7 +18,7 @@ sudo apt install -y enum4linux ldapscripts jq parallel seclists #bloodhound
 
 #Python virtual env
 cd ~
-sudo apt install python3-venv #python3.10-venv
+sudo apt install -y python3-venv #python3.10-venv
 #python3 -m venv env
 #source env/bin/activate
 
