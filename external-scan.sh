@@ -86,7 +86,6 @@ mkdir -p $companypath/nmap/results/dnsrecon
 cd $companypath/nmap/results/dnsrecon
 parallel -a $companypath/nmap/parsed/dns-tcp-hosts.txt --progress -j 10 "dnsrecon -d {} -t axfr > {=s/\///g=}"
 
-
 #SSLScan
 echo "RUNNING SSL SCAN"
 mkdir -p $companypath/nmap/results/sslscan
@@ -100,6 +99,10 @@ cd $companypath/nmap/results/sslscan
 grep "vulnerable" * | grep -v "not" > vulnerable.txt #NEED TO CUT OUT IP IF RESULTS
 grep "enabled" * | grep "TLSv1.0" | cut -d ":" -f1 > tls10.txt
 grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
+
+#SSH Audit
+#python3 ssh-audit.py -T <target file>
+#Extract ssh file from parsed
 
 #nikto
 echo "RUNNING NIKTO"
