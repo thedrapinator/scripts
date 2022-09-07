@@ -1,5 +1,7 @@
 #!/bin/bash
 
+###ADD SECRETSDUMP METHOD AND FILTER ON ENABLED
+
 # Usage: combine-ntlm.sh ntds.dit cracked.txt
 
 #cat $1 | grep ::: | grep -v '\$' > tmp.ntds.users.txt
