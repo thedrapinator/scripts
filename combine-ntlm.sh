@@ -1,28 +1,18 @@
 #!/bin/bash
 
-###ADD SECRETSDUMP METHOD AND FILTER ON ENABLED
+# Usage: combine-ntlm.sh ntds.txt cracked.txt
 
-# Usage: combine-ntlm.sh ntds.dit cracked.txt
-
-#cat $1 | grep ::: | grep -v '\$' > tmp.ntds.users.txt
-
-#Get Userlist of cracked hashes
-#while read -r line; do grep `echo $line | cut -d ":" -f1` tmp.ntds.users.txt; echo $line|cut -d ":" -f2; done < $2 | grep ::: | cut -d '\' -f2 | cut -d : -f1 > zCRACKED-USERLIST.txt
-
-#Password matching for pipal analysis
-#while read -r line; do grep `echo $line | cut -d ":" -f4` $2; echo $line|cut -d ":" -f1,4 | cut -d " " -f5; done < tmp.ntds.users.txt
-#while read -r line; do grep `echo -n $line | cut -d ":" -f4` $2; echo -n $line|cut -d ":" -f1,4| cut -d " " -f5 ; done < tmp.ntds.users.txt | grep -v '\\' | cut -d : -f2 > zPIPAL.txt
-
-#rm tmp.ntds.users.txt
-
+#Parse and match with john
+cat $1 | grep ::: > tmp.ntds.txt
 cat $2 | cut -d : -f2 > tmp.pass.txt
-cat $1 | grep ::: | cut -d ' ' -f26  > tmp.ntds.txt  #Do a rev and make more accurate
 john tmp.ntds.txt --wordlist=tmp.pass.txt --format=NT
-john tmp.ntds.txt --format=NT --show | cut -d : -f1,2 > COMBINED.txt
+john tmp.ntds.txt --format=NT --show > john.txt
 
-cat COMBINED.txt | cut -d : -f1 > COMBINED-USERS.txt
-cat COMBINED.txt | cut -d : -f2 > COMBINED-PASS.txt
+#User list and Pass File
+cat john.txt | cut -d : -f2 > CLEAR-PASS.txt
 
-grep -f admins.txt COMBINED.txt > COMBINED-ADMINS.txt
+#From ldapdomaindump
+cat domain_users.grep | grep 'Domain Admin' | grep -v Disabled | cut -d$'\t' -f3 > domain-admins.txt
+grep -f domain-admins.txt john.txt | cut -d : -f1,2 > CLEAR-DOMAIN-ADMIN.txt
 
-pipal COMBINED-PASS.txt
+pipal CLEAR-PASS.txt > CLEAR-PIPAL.txt
