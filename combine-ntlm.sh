@@ -9,7 +9,7 @@ john tmp.ntds.txt --wordlist=tmp.pass.txt --format=NT
 john tmp.ntds.txt --format=NT --show > john.txt
 
 #User list and Pass File
-cat john.txt | cut -d : -f2 > CLEAR-PASS.txt
+cat john.txt | grep ::: | cut -d : -f2 > CLEAR-PASS.txt
 
 #From ldapdomaindump
 cat domain_users.grep | grep 'Domain Admin' | grep -v Disabled | cut -d$'\t' -f3 > domain-admins.txt
