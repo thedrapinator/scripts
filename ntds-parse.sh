@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#impacket-secretsdump corp.yamww.com/rapid7:'Rapid7!Rapid7!'@10.8.22.39 -user-status -outputfile log.NTDS.secretsdump
+#impacket-secretsdump domain/user:'pass'@ip -user-status -outputfile log.NTDS.secretsdump
 cat $1 | grep Enabled | grep -v '\$' | grep ::: | rev | cut -d ' ' -f2,3,4,5,6,7,8,9 | rev > ntds.all
 echo "`cat ntds.all | wc -l` user hashes gathered"
 
