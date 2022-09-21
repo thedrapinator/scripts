@@ -18,3 +18,4 @@ echo "`cat ntds.no.pass | wc -l` accounts with blank passwords"
 
 cat ntds.all | grep -a '8846f7eaee8fb117ad06bdd830b7586c' > ntds.password.as.password
 echo "`cat ntds.password.as.password | wc -l` accounts with password as password"
+
