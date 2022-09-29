@@ -47,6 +47,9 @@ sudo ./update.sh
 #SSH SCan
 git clone https://github.com/evict/SSHScan $tools/SSHScan
 
+#Shcheck
+sudo pip3 install shcheck
+
 #nmap-grep
 git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
 
