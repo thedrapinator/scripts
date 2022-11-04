@@ -30,7 +30,7 @@ END
 
 ## Breach Database Emails
 curl -H "Authorization: apikey $api" https://search.breachinator.com/search\?domain\=$domain\&limit=50000 | jq -r '.[] | "\(.username) \(.password)"' > $companypath/breach.txt
-cat $companypath/breach.txt | cut -d " " -f1 > $companypath/emails_combined.txt
+cat $companypath/breach.txt | cut -d " " -f1 > $companypath/emails_tmp.txt
 
 #BreachDB Users
 cat $companypath/breach.txt | cut -d "@" -f1 | grep -v "\." | sort -u > $companypath/possible_breach_tmp.txt
@@ -74,10 +74,12 @@ firefox "https://phonebook.cz/"&
 
 #Combine email lists, clean, make possible users list
 echo "==== LAUNCHING GEDIT PLEASE ADD EMAILS FROM PHONEBOOK.CZ TO FILE ===="
-gedit $companypath/emails_combined.txt
+gedit $companypath/emails_tmp.txt
+cat $companypath/emails_tmp.txt | sort -u > emails_combined.txt
 cat $companypath/emails_combined.txt | cut -d "@" -f1 | grep -v "\." | sort -u > $companypath/possible_users_tmp.txt
 cat $companypath/emails_combined.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*)/& \L\1\2/' | cut -d " " -f2 | sort -u >> $companypath/possible_users_tmp.txt
 sort -u $companypath/possible_users_tmp.txt > $companypath/possible_users.txt
+rm $companypath/emails_tmp.txt
 rm $companypath/possible_users_tmp.txt
 
 echo "=======DONE======"
