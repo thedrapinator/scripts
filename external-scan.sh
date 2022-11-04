@@ -105,6 +105,11 @@ grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
 #python3 ssh-audit.py -T <target file>
 #Extract ssh file from parsed
 
+echo "RUNNING NUCLEI"
+mkdir -p $companypath/nmap/results/nuclei
+cd $companypath/nmap/results/nuclei
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nuclei -u {} > {=s/\///g=}"
+
 #nikto
 echo "RUNNING NIKTO"
 mkdir -p $companypath/nmap/results/nikto
