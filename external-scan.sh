@@ -73,12 +73,13 @@ cat $companypath/nmap/nmap.xml | $tools/aquatone -nmap -out $companypath/aquaton
 #Make results folder
 mkdir -p $companypath/nmap/results
 
-##########
-
 #Check security headers on URLs in scope
 #./shcheck [Target URL]
-
-#################
+#SHCHECK
+echo "RUNNING SHCHECK"
+mkdir -p $companypath/nmap/results/shcheck
+cd $companypath/nmap/results/shcheck
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "shcheck.py {} > {=s/\///g=}"
 
 #DNSrecon
 echo "RUNNING DNS RECON"
