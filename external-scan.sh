@@ -80,6 +80,7 @@ echo "RUNNING SHCHECK"
 mkdir -p $companypath/nmap/results/shcheck
 cd $companypath/nmap/results/shcheck
 parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "shcheck.py {} > {=s/\///g=}"
+grep -i missing * | cut -d : -f1,2 | sort -u > AFFECTED-HOSTS.txt
 
 #DNSrecon
 echo "RUNNING DNS RECON"
