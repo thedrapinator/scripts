@@ -25,7 +25,7 @@ sudo apt update
 #sudo apt reinstall libwacom-common -y
 #sudo apt upgrade -y
 #sudo apt install -y bloodhound chromium gedit enum4linux ldapscripts jq parallel terminator seclists
-sudo apt install -y jq parallel seclists nuclei
+sudo apt install -y jq parallel seclists nuclei metagoofil
 
 #eyewitness install
 #git clone https://github.com/FortyNorthSecurity/EyeWitness.git $tools/Eyewitness
