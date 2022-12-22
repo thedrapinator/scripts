@@ -70,6 +70,12 @@ grep "vulnerable" * | grep -v "not" > vulnerable.txt #NEED TO CUT OUT IP IF RESU
 grep "enabled" * | grep "TLSv1.0" | cut -d ":" -f1 > tls10.txt
 grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
 
+#nuclei
+echo "RUNNING NUCLEI"
+mkdir -p $companypath/nmap/results/nuclei
+cd $companypath/nmap/results/nuclei
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nuclei -u {} > {=s/\///g=}"
+
 #nikto
 echo "RUNNING NIKTO"
 mkdir -p $companypath/nmap/results/nikto
