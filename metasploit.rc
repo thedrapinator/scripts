@@ -41,43 +41,43 @@ spool off
 
 #Telnet tests (version/banner grab, default logins)
 
-spool logs/log.telnet.version
-use auxiliary/scanner/telnet/telnet_version
-set RHOSTS file:telnet-hosts.txt
-set threads 1
-set timeout 5
-run
-spool off
+#spool logs/log.telnet.version
+#use auxiliary/scanner/telnet/telnet_version
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#run
+#spool off
 
-spool logs/log.telnet.login.admin
-use auxiliary/scanner/telnet/telnet_login
-set RHOSTS file:telnet-hosts.txt
-set threads 1
-set timeout 5
-set username admin
-set password admin
-run
-spool off
+#spool logs/log.telnet.login.admin
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username admin
+#set password admin
+#run
+#spool off
 
-spool logs/log.telnet.login.root
-use auxiliary/scanner/telnet/telnet_login
-set RHOSTS file:telnet-hosts.txt
-set threads 1
-set timeout 5
-set username root
-set password root
-run
-spool off
+#spool logs/log.telnet.login.root
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username root
+#set password root
+#run
+#spool off
 
-spool logs/log.telnet.login.cisco
-use auxiliary/scanner/telnet/telnet_login
-set RHOSTS file:telnet-hosts.txt
-set threads 1
-set timeout 5
-set username cisco
-set password cisco
-run
-spool off
+#spool logs/log.telnet.login.cisco
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username cisco
+#set password cisco
+#run
+#spool off
 
 #SSH banner grabs
 
