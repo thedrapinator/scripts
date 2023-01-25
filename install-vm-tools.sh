@@ -38,11 +38,11 @@ wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_
 unzip aquatone_linux_amd64_1.7.0.zip
 
 #Discover OSINT Tool
-git clone https://github.com/leebaird/discover $tools/discover/
+#git clone https://github.com/leebaird/discover $tools/discover/
 #All scripts must be ran from this location.
-sudo chmod +x $tools/discover/update.sh
-cd  $tools/discover
-sudo ./update.sh
+#sudo chmod +x $tools/discover/update.sh
+#cd  $tools/discover
+#sudo ./update.sh
 
 #SSH SCan
 git clone https://github.com/evict/SSHScan $tools/SSHScan
