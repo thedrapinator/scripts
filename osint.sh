@@ -66,7 +66,7 @@ sleep 1
 ### MANUAL SEARCHES ###
 echo "Domain is: $domain"
 #### DNSDUMPSTER ###
-firefox "https://dnsdumpster.com/"&
+#firefox "https://dnsdumpster.com/"&
 ## Phonebook.cz combine with emails
 firefox "https://phonebook.cz/"&
 ## Hunter.io
@@ -81,5 +81,11 @@ cat $companypath/emails_combined.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.
 sort -u $companypath/possible_users_tmp.txt > $companypath/possible_users.txt
 rm $companypath/emails_tmp.txt
 rm $companypath/possible_users_tmp.txt
+
+echo "==== Gathering Files for Metadata Analysis ===="
+cd $companypath
+metagoofil -d $domain -t docx,pdf,xlsx,pptx -o meta -w
+#metagoofil -d $domain -t doc,docx,pdf,csv,xls,xlsx,ppt,pptx -o files -w
+cd $companypath/meta
 
 echo "=======DONE======"
