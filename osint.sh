@@ -87,5 +87,6 @@ cd $companypath
 metagoofil -d $domain -t docx,pdf,xlsx,pptx -o meta -w
 #metagoofil -d $domain -t doc,docx,pdf,csv,xls,xlsx,ppt,pptx -o files -w
 cd $companypath/meta
+for f in ./*; do exiftool $f | tee $f.meta; done
 
 echo "=======DONE======"
