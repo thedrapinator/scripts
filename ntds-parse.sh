@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #impacket-secretsdump domain/user:'pass'@ip -user-status -outputfile log.NTDS.secretsdump
-cat $1 | grep Enabled | grep -v '\$' | grep ::: | rev | cut -d ' ' -f2,3,4,5,6,7,8,9 | rev > ntds.all
-echo "`cat ntds.all | wc -l` user hashes gathered"
+cat $1 | grep Enabled | grep -v '\$' | grep ::: | cut -d ' ' -f1 > ntds.all
+echo "`cat ntds.all | wc -l` enabled user hashes gathered"
 
 #NT Hashes for hashtopolis
 cat ntds.all | cut -d : -f4 | sort -u > ntds.nt.hashtopolis
@@ -18,4 +18,3 @@ echo "`cat ntds.no.pass | wc -l` accounts with blank passwords"
 
 cat ntds.all | grep -a '8846f7eaee8fb117ad06bdd830b7586c' | cut -d : -f1 > ntds.password.as.password
 echo "`cat ntds.password.as.password | wc -l` accounts with password as password"
-
