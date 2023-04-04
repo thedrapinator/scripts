@@ -90,5 +90,6 @@ metagoofil -d $domain -t docx,pdf,xlsx,pptx -o meta -w
 #metagoofil -d $domain -t doc,docx,pdf,csv,xls,xlsx,ppt,pptx -o files -w
 cd $companypath/meta
 for f in ./*; do exiftool $f | tee $f.meta; done
+cat *.meta | grep -E -i "name|version|author|creator|tool|producer" | grep -i -v -E "file name|swatch|exiftool|plate|font" > ALL.meta
 
 echo "=======DONE======"
