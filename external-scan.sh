@@ -118,7 +118,7 @@ cd $companypath/nmap/results/nikto
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
 #while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
 #parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q nikto -h {} -maxtime 1h > {=s/\///g=}"
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nikto -h {} -maxtime 1h > {=s/\///g=}"
 
 #Nikto Grep Vulns
 cd $companypath/nmap/results/nikto
