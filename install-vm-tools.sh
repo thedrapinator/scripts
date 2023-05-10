@@ -51,7 +51,7 @@ git clone https://github.com/evict/SSHScan $tools/SSHScan
 sudo pip3 install shcheck
 
 #nmap-grep
-git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
+git clone https://github.com/thedrapinator/nmap-grep.git $tools/nmap-grep
 
 #xmltocsv
 git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git $tools/Nmap-Scan-to-CSV
