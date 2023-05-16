@@ -5,8 +5,8 @@ cat $1 | grep Enabled | grep -v '\$' | grep ::: | cut -d ' ' -f1 > ntds.all
 echo "`cat ntds.all | wc -l` enabled user hashes gathered"
 
 #NT Hashes for hashtopolis
-cat ntds.all | cut -d : -f4 | sort -u > ntds.nt.hashtopolis
-echo "`cat ntds.nt.hashtopolis | wc -l` unique user password hashes"
+cat ntds.all | cut -d : -f4 > ntds.nt.hashtopolis
+echo "`cat ntds.nt.hashtopolis | sort -u | wc -l` unique user password hashes"
 
 #LM Hashes enabled
 cat ntds.all | grep -av 'aad3b435b51404eeaad3b435b51404ee' | cut -d : -f1 > ntds.lm.hash.enabled
