@@ -34,6 +34,11 @@ $tools/nmap-grep/nmap-grep.sh $companypath/nmap/initial.gnmap --out-dir $company
 cd $companypath/nmap/parsed
 msfconsole -r $scripts/metasploit.rc
 
+###Resolve IP's###
+cd $companypath/nmap/parsed
+cat web-urls.txt| cut -d '/' -f3 | cut -d : -f1 | sort -u > web-ip.txt
+$scripts/nslookuploop.sh web-ip.txt | tee log.nslookup
+
 ### big nmap scan ##
 nmap -v -sV -Pn -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
