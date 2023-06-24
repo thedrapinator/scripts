@@ -64,10 +64,9 @@ git clone https://github.com/ly4k/Certipy $tools/Certipy
 cd $tools/Certipy
 #python3 setup.py install
 
-#Certipy
+#PKINIT
 git clone https://github.com/dirkjanm/PKINITtools $tools/PKINITtools
 
-https://github.com/dirkjanm/PKINITtools
 
 #Deactiveate Python virtual env
 #deactivate
