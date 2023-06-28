@@ -31,10 +31,10 @@ curl -H "Authorization: apikey $api" https://search.breachinator.com/search\?dom
 cat $companypath/breach.txt | cut -d " " -f1 > $companypath/emails_tmp.txt
 
 #BreachDB Users
-cat $companypath/breach.txt | cut -d "@" -f1 | grep -v "\." | sort -u > $companypath/possible_breach_tmp.txt
-cat $companypath/breach.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*)/& \L\1\2/' | cut -d " " -f2 | sort -u >> $companypath/possible_breach_tmp.txt
-sort -u $companypath/possible_breach_tmp.txt > $companypath/possible_breach_users.txt
-rm $companypath/possible_breach_tmp.txt
+#cat $companypath/breach.txt | cut -d "@" -f1 | grep -v "\." | sort -u > $companypath/possible_breach_tmp.txt
+#cat $companypath/breach.txt | cut -d "@" -f1 | grep "\." | sed -r 's/(.)\S*\.(.*)/& \L\1\2/' | cut -d " " -f2 | sort -u >> $companypath/possible_breach_tmp.txt
+#sort -u $companypath/possible_breach_tmp.txt > $companypath/possible_breach_users.txt
+#rm $companypath/possible_breach_tmp.txt
 
 #BreachDB Passwords Only
 cat $companypath/breach.txt | cut -d " " -f2 > $companypath/breach-pass.txt
