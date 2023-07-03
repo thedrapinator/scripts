@@ -101,6 +101,7 @@ cd $companypath/nmap/results/sslscan
 grep "vulnerable" * | grep -v "not" > vulnerable.txt #NEED TO CUT OUT IP IF RESULTS
 grep "enabled" * | grep "TLSv1.0" | cut -d ":" -f1 > tls10.txt
 grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
+grep "Issuer" * > certificates.txt
 
 #SSH Audit
 #python3 ssh-audit.py -T <target file>
