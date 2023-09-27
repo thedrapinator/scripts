@@ -42,6 +42,10 @@ $scripts/nslookuploop.sh web-ip.txt | tee log.nslookup
 ### big nmap scan ##
 nmap -v -sV -Pn -iL $companypath/inscope.txt -oA $companypath/nmap/nmap
 
+#Parse Rules
+cd -p $companypath/nmap
+cat nmap.nmap | grep open | grep -v tcpwrapped | tr -s ' ' | cut -d ' ' -f4- |sort | uniq -c | sort -r > services.nmap
+
 ##Convert nmap scan to CSV for spreadsheet
 python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
 #python3 /opt/Nmap-Scan-to-CSV/nmap_xml_parser.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap/nmap.csv
