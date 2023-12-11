@@ -35,7 +35,7 @@ fi
 #########################################
 
 #Set URL and DOMAIN
-url=$(cat inscope.txt)
+url=$(cat $companypath/inscope.txt)
 domain=$(echo $url | cut -d '/' -f3-)
 
 #Grab Headers
@@ -58,7 +58,7 @@ whatweb $url | tee whatweb.txt
 nikto -url $url -o nikto.txt
 
 #Testssl
-testssl $url -oA testssl
+testssl -oA testssl $url
 
 #Shcheck
 #Used secureheaders site instead
