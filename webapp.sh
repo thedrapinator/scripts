@@ -64,7 +64,7 @@ testssl -oA testssl $url
 #Used secureheaders site instead
 
 #nuclei
-nuclei -u $url | tee nuclei.txt
+nuclei -ni -u $url | tee nuclei.txt
 
 #Directory Brute Force
 #feroxbuster -A --url $url -o feroxbuster.txt
