@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Add API.txt file instead of having to manually enter it every time
 # change ability to enter folder name seperate from domain
