@@ -114,7 +114,7 @@ grep "Issuer" * > certificates.txt
 echo "RUNNING NUCLEI"
 mkdir -p $companypath/nmap/results/nuclei
 cd $companypath/nmap/results/nuclei
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nuclei -u {} > {=s/\///g=}"
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nuclei -ni -u {} > {=s/\///g=}"
 
 #nikto
 echo "RUNNING NIKTO"
