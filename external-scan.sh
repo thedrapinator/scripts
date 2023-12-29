@@ -71,7 +71,7 @@ python3 $scripts/xml2csv.py -f $companypath/nmap/nmap.xml -csv $companypath/nmap
 # Aquatone
 mkdir -p $companypath/aquatone
 cd $companypath/aquatone
-cat $companypath/nmap/nmap.xml | $tools/aquatone -nmap -out $companypath/aquatone
+cat $companypath/nmap/nmap.xml | $tools/aquatone -nmap --ports xlarge -out $companypath/aquatone
 #$tools/aquatone -nmap $companypath/nmap/nmap.xml -ports xlarge -out $companypath/aquatone 
 
 #Make results folder
