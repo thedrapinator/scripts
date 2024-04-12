@@ -16,6 +16,11 @@ mkdir -p $tools
 sudo apt update
 sudo apt install -y enum4linux ldapscripts jq parallel seclists nuclei #bloodhound
 
+#netexec
+sudo apt install pipx git
+pipx ensurepath
+pipx install git+https://github.com/Pennyw0rth/NetExec
+
 #Python virtual env
 cd ~
 sudo apt install -y python3-venv #python3.10-venv
