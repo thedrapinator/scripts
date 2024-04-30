@@ -17,6 +17,7 @@ echo "Files stored in $companypath"
 
 #make folder if it does not exist
 mkdir -p $companypath
+cd $companypath
 
 echo "ENTER/VERIFY IN SCOPE IP ADDRESSES ONE ON EACH LINE IN CIDR NOTATION!!! Opening file in gedit please wait....."
 sleep 1
