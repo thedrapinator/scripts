@@ -17,7 +17,7 @@ sudo apt update
 sudo apt install -y enum4linux ldapscripts jq parallel seclists nuclei #bloodhound
 
 #netexec
-sudo apt install pipx git
+sudo apt install pipx git -y
 pipx ensurepath
 pipx install git+https://github.com/Pennyw0rth/NetExec
 
