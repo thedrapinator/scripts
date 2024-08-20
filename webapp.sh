@@ -37,7 +37,7 @@ fi
 
 #Set URL and DOMAIN
 url=$(cat $companypath/inscope.txt)
-domain=$(echo $url | cut -d '/' -f3-)
+domain=$(echo $url | cut -d '/' -f3)
 
 #Grab Headers
 curl -i $url --head > headers.txt
