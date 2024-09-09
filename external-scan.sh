@@ -116,6 +116,16 @@ mkdir -p $companypath/nmap/results/nuclei
 cd $companypath/nmap/results/nuclei
 parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -u {} > {=s/\///g=}"
 
+#nuclei headers:
+#Strict-Transport-Security
+#X-Content-Type-Options
+#X-Frame-Options
+#Content-Security-Policy
+#X-Permitted-Cross-Domain-Policies
+#for i in $(cat header2.txt); do echo $i; cat http* | grep -i $i | cut -d ' ' -f4; done
+
+
+
 #nikto
 echo "RUNNING NIKTO"
 mkdir -p $companypath/nmap/results/nikto
