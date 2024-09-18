@@ -67,6 +67,10 @@ testssl -oA testssl $url
 #nuclei
 nuclei -ni -u $url | tee nuclei.txt
 
+#Missing headers from nulei scan
+cat nuclei.txt | grep -if $scripts/missing-headers.txt > missing-headers.log
+
+
 #Directory Brute Force
 #feroxbuster -A --url $url -o feroxbuster.txt
 gobuster dir -w /usr/share/wordlists/dirb/common.txt -u $url -o gobuster.txt --random-agent -k -b 500
