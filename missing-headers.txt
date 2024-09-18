@@ -1,0 +1,5 @@
+Strict-Transport-Security
+X-Content-Type-Options
+X-Frame-Options
+Content-Security-Policy
+X-Permitted-Cross-Domain-Policies
