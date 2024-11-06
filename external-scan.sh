@@ -114,7 +114,7 @@ grep "Issuer" * > certificates.txt
 echo "RUNNING NUCLEI"
 mkdir -p $companypath/nmap/results/nuclei
 cd $companypath/nmap/results/nuclei
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -u {} > {=s/\///g=}"
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -nmhe -u {} > {=s/\///g=}"
 
 #nuclei headers:
 #Strict-Transport-Security
@@ -127,25 +127,24 @@ parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -u
 
 
 #nikto
-echo "RUNNING NIKTO"
-mkdir -p $companypath/nmap/results/nikto
-cd $companypath/nmap/results/nikto
-#while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
-#while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
-#parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nikto -h {} -maxtime 1h > {=s/\///g=}"
+#echo "RUNNING NIKTO"
+#mkdir -p $companypath/nmap/results/nikto
+#cd $companypath/nmap/results/nikto
+###while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
+###while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
+###parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
+#parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nikto -h {} -maxtime 1h > {=s/\///g=}"
 
 #Nikto Grep Vulns
-cd $companypath/nmap/results/nikto
-grep -i 'real ip' http* > ip-in-header.txt  #Internal IP in Header
-grep -i 'ip address found' http* >> ip-in-header.txt
-grep -i 'outdated' http* > outdated-software.txt
-grep -i 'interesting' http* > interesting.txt
-grep -i 'indexing' http* >> interesting.txt
-
-grep -i 'OSVBD' http* > osvdb.log
-grep -i 'RFC' http* > rfc.log
-grep -i 'vulnerable' http* > vulnerable.log
+#cd $companypath/nmap/results/nikto
+#grep -i 'real ip' http* > ip-in-header.txt  #Internal IP in Header
+#grep -i 'ip address found' http* >> ip-in-header.txt
+#grep -i 'outdated' http* > outdated-software.txt
+#grep -i 'interesting' http* > interesting.txt
+#grep -i 'indexing' http* >> interesting.txt
+#grep -i 'OSVBD' http* > osvdb.log
+#grep -i 'RFC' http* > rfc.log
+#grep -i 'vulnerable' http* > vulnerable.log
 
 
 #ffuf
