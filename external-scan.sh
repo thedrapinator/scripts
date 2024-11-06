@@ -114,7 +114,9 @@ grep "Issuer" * > certificates.txt
 echo "RUNNING NUCLEI"
 mkdir -p $companypath/nmap/results/nuclei
 cd $companypath/nmap/results/nuclei
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -nmhe -u {} > {=s/\///g=}"
+#parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -nmhe -u {} > {=s/\///g=}"
+nuclei -ni -nmhe -l $companypath/nmap/parsed/web-urls.txt -o nuclei.txt
+
 
 #nuclei headers:
 #Strict-Transport-Security
