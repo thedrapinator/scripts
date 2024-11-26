@@ -84,38 +84,37 @@ grep "enabled" * | grep "TLSv1.1" | cut -d ":" -f1 > tls11.txt
 echo "RUNNING NUCLEI"
 mkdir -p $companypath/nmap/results/nuclei
 cd $companypath/nmap/results/nuclei
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "nuclei -no-interactsh -u {} > {=s/\///g=}"
+parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -no-interactsh -u {} > {=s/\///g=}"
 
 #nikto
-echo "RUNNING NIKTO"
-mkdir -p $companypath/nmap/results/nikto
-cd $companypath/nmap/results/nikto
+##echo "RUNNING NIKTO"
+##mkdir -p $companypath/nmap/results/nikto
+##cd $companypath/nmap/results/nikto
 #while read -r line; do nikto -h $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/nikto.txt
 #while read -r line; do proxychains -q nikto -h $line -maxtime 1h | tee $companypath/nmap/results/nikto/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
 #parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 proxychains -q nikto -h {} -maxtime 1h -output . -Format txt
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q nikto -h {} -maxtime 1h > {=s/\///g=}"
+##parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q nikto -h {} -maxtime 1h > {=s/\///g=}"
 
 #Nikto Grep Vulns
-cd $companypath/nmap/results/nikto
-grep -i 'real ip' http* > ip-in-header.txt  #Internal IP in Header
-grep -i 'ip address found' http* >> ip-in-header.txt
-grep -i 'outdated' http* > outdated-software.txt
-grep -i 'interesting' http* > interesting.txt
-grep -i 'indexing' http* >> interesting.txt
-grep -i 'OSVBD' http* > osvdb.log
-grep -i 'RFC' http* > rfc.log
-grep -i 'vulnerable' http* > vulnerable.log
+#cd $companypath/nmap/results/nikto
+#grep -i 'real ip' http* > ip-in-header.txt  #Internal IP in Header
+#grep -i 'ip address found' http* >> ip-in-header.txt
+#grep -i 'outdated' http* > outdated-software.txt
+#grep -i 'interesting' http* > interesting.txt
+#grep -i 'indexing' http* >> interesting.txt
+#grep -i 'OSVBD' http* > osvdb.log
+#grep -i 'RFC' http* > rfc.log
+#grep -i 'vulnerable' http* > vulnerable.log
 
 #ffuf
-mkdir -p $companypath/nmap/results/ffuf
-cd $companypath/nmap/results/ffuf
+##mkdir -p $companypath/nmap/results/ffuf
+##cd $companypath/nmap/results/ffuf
 #while read -r line; do dirb $line; done < $companypath/nmap/parsed/web-urls.txt | tee $companypath/nmap/results/dirb.txt
 #ffuf -w /usr/share/wordlists/dirb/common.txt -u $line/FUZZ -o ffuf-
 #ffuf -w web-urls.txt:TARGET -w /usr/share/wordlists/dirb/common.txt -u TARGET/FUZZ
 #interlace -tL <domain list> -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
 #interlace -tL $companypath/nmap/parsed/web-urls.txt -c "ffuf -u _target_ -w /usr/share/wordlists/dirb/common.txt -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee ffuf/$url.txt
 #while read -r line; do proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u $line''FUZZ -maxtime-job 3600 -se -sf -mc all -fc 300,301,302,303,500,400,404 | tee $companypath/nmap/results/ffuf/`echo $line | sed 's/\///g'`; done < $companypath/nmap/parsed/web-urls.txt
-parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u {}FUZZ -maxtime-job 3600 -noninteractive -se -sf -mc all -fc 300,301,302,303,500,400,404 > {=s/\///g=}"
-
+##parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 10 "proxychains -q ffuf -w /usr/share/wordlists/dirb/common.txt -u {}FUZZ -maxtime-job 3600 -noninteractive -se -sf -mc all -fc 300,301,302,303,500,400,404 > {=s/\///g=}"
 
 echo "SCRIPT COMPLETED!!!"
