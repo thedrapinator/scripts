@@ -14,12 +14,12 @@ mkdir -p $tools
 
 #Install tools
 sudo apt update
-sudo apt install -y enum4linux ldapscripts jq parallel seclists nuclei #bloodhound
+sudo apt install -y enum4linux ldapscripts jq parallel seclists nuclei netexec #bloodhound
 
 #netexec
-sudo apt install pipx git -y
-pipx ensurepath
-pipx install git+https://github.com/Pennyw0rth/NetExec
+#sudo apt install pipx git -y
+#pipx ensurepath
+#pipx install git+https://github.com/Pennyw0rth/NetExec
 
 #Python virtual env
 cd ~
