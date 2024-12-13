@@ -117,7 +117,6 @@ cd $companypath/nmap/results/nuclei
 #parallel -a $companypath/nmap/parsed/web-urls.txt --progress -j 1 "nuclei -ni -nmhe -u {} > {=s/\///g=}"
 nuclei -ni -nmhe -l $companypath/nmap/parsed/web-urls.txt -o nuclei.txt
 
-
 #nuclei headers:
 #Strict-Transport-Security
 #X-Content-Type-Options
@@ -125,7 +124,7 @@ nuclei -ni -nmhe -l $companypath/nmap/parsed/web-urls.txt -o nuclei.txt
 #Content-Security-Policy
 #X-Permitted-Cross-Domain-Policies
 #for i in $(cat header2.txt); do echo $i; cat http* | grep -i $i | cut -d ' ' -f4; done
-
+cat nuclei.txt | grep header | grep -iE "strit-transport|content-type|frame-options|content-security|cross-domain" | cut -d ' ' -f1,4  | cut -d : -f2- | awk -F'] ' '{print $2 " " $1}' > headers.txt
 
 
 #nikto
