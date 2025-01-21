@@ -46,7 +46,7 @@ cd $tools/Bloodhound.py
 git clone https://github.com/evict/SSHScan $tools/SSHScan
 
 #nmap-grep
-git clone https://github.com/thedrapiator/nmap-grep.git $tools/nmap-grep
+git clone https://github.com/sirchsec/nmap-grep.git $tools/nmap-grep
 
 #xmltocsv
 git clone https://github.com/laconicwolf/Nmap-Scan-to-CSV.git $tools/Nmap-Scan-to-CSV
