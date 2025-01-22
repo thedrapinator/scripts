@@ -3,6 +3,82 @@ mkdir logs
 setg verbose true
 setg timestampoutput true
 
+
+#IPMI enumeration, cipher zero check, and hashdump
+
+spool logs/log.ipmi.version
+use auxiliary/scanner/ipmi/ipmi_version
+set RHOSTS file:623-udp-hosts.txt
+run
+spool off
+
+spool logs/log.ipmi.cipherzero
+use auxiliary/scanner/ipmi/ipmi_cipher_zero
+set RHOSTS file:623-udp-hosts.txt
+run
+spool off
+
+spool logs/log.ipmi.dumphashes
+use auxiliary/scanner/ipmi/ipmi_dumphashes
+set RHOSTS file:623-udp-hosts.txt
+set threads 1
+run
+spool off
+
+#VNC 
+
+spool logs/log.vnc.noneauth
+use auxiliary/scanner/vnc/vnc_none_auth
+set RHOSTS file:5900-tcp-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.vnc.noneauth
+use auxiliary/scanner/vnc/vnc_none_auth
+set RHOSTS file:5800-tcp-hosts.txt
+set threads 1
+set rport 5800
+run
+spool off
+
+
+#MS-SQL enumeration
+
+spool logs/log.mssql.ping
+use auxiliary/scanner/mssql/mssql_ping
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+run
+spool off
+
+spool logs/log.mssql.login
+use auxiliary/scanner/mssql/mssql_login
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
+spool logs/log.mssql.schema
+use auxiliary/scanner/mssql/mssql_schemadump
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
+spool logs/log.mssql.hashdump
+use auxiliary/scanner/mssql/mssql_hashdump
+set RHOSTS file:mssql-hosts.txt
+set threads 1
+set username sa
+set password sa
+run
+spool off
+
 #FTP tests (version/banner grab, anonymous login, default logins)
 
 spool logs/log.ftp.version
@@ -36,56 +112,6 @@ set RHOSTS file:ftp-hosts.txt
 set threads 1
 set username root
 set username root
-run
-spool off
-
-#Telnet tests (version/banner grab, default logins)
-
-#spool logs/log.telnet.version
-#use auxiliary/scanner/telnet/telnet_version
-#set RHOSTS file:telnet-hosts.txt
-#set threads 1
-#set timeout 5
-#run
-#spool off
-
-#spool logs/log.telnet.login.admin
-#use auxiliary/scanner/telnet/telnet_login
-#set RHOSTS file:telnet-hosts.txt
-#set threads 1
-#set timeout 5
-#set username admin
-#set password admin
-#run
-#spool off
-
-#spool logs/log.telnet.login.root
-#use auxiliary/scanner/telnet/telnet_login
-#set RHOSTS file:telnet-hosts.txt
-#set threads 1
-#set timeout 5
-#set username root
-#set password root
-#run
-#spool off
-
-#spool logs/log.telnet.login.cisco
-#use auxiliary/scanner/telnet/telnet_login
-#set RHOSTS file:telnet-hosts.txt
-#set threads 1
-#set timeout 5
-#set username cisco
-#set password cisco
-#run
-#spool off
-
-#SSH banner grabs
-
-spool logs/log.ssh.version
-use auxiliary/scanner/ssh/ssh_version
-set RHOSTS file:ssh-hosts.txt
-set threads 1
-set timeout 5
 run
 spool off
 
@@ -135,60 +161,29 @@ set threads 1
 run
 spool off
 
-#IPMI enumeration, cipher zero check, and hashdump
+#Network File Shares (NSF)
 
-spool logs/log.ipmi.version
-use auxiliary/scanner/ipmi/ipmi_version
-set RHOSTS file:623-udp-hosts.txt
-run
-spool off
-
-spool logs/log.ipmi.cipherzero
-use auxiliary/scanner/ipmi/ipmi_cipher_zero
-set RHOSTS file:623-udp-hosts.txt
-run
-spool off
-
-spool logs/log.ipmi.dumphashes
-use auxiliary/scanner/ipmi/ipmi_dumphashes
-set RHOSTS file:623-udp-hosts.txt
+spool logs/log.nfs.mount.udp
+use auxiliary/scanner/nfs/nfsmount
+set RHOSTS file:111-udp-hosts.txt
 set threads 1
 run
 spool off
 
-#MS-SQL enumeration
-
-spool logs/log.mssql.ping
-use auxiliary/scanner/mssql/mssql_ping
-set RHOSTS file:mssql-hosts.txt
+spool logs/log.nfs.mount.tcp
+set RHOSTS file:111-tcp-hosts.txt
+set protocol tcp
 set threads 1
 run
 spool off
 
-spool logs/log.mssql.login
-use auxiliary/scanner/mssql/mssql_login
-set RHOSTS file:mssql-hosts.txt
-set threads 1
-set username sa
-set password sa
-run
-spool off
+#SSH banner grabs
 
-spool logs/log.mssql.schema
-use auxiliary/scanner/mssql/mssql_schemadump
-set RHOSTS file:mssql-hosts.txt
+spool logs/log.ssh.version
+use auxiliary/scanner/ssh/ssh_version
+set RHOSTS file:ssh-hosts.txt
 set threads 1
-set username sa
-set password sa
-run
-spool off
-
-spool logs/log.mssql.hashdump
-use auxiliary/scanner/mssql/mssql_hashdump
-set RHOSTS file:mssql-hosts.txt
-set threads 1
-set username sa
-set password sa
+set timeout 5
 run
 spool off
 
@@ -286,39 +281,6 @@ set RHOSTS file:snmp-hosts.txt
 set community private
 set threads 1
 set version 2c
-run
-spool off
-
-#VNC 
-
-spool logs/log.vnc.noneauth
-use auxiliary/scanner/vnc/vnc_none_auth
-set RHOSTS file:5900-tcp-hosts.txt
-set threads 1
-run
-spool off
-
-spool logs/log.vnc.noneauth
-use auxiliary/scanner/vnc/vnc_none_auth
-set RHOSTS file:5800-tcp-hosts.txt
-set threads 1
-set rport 5800
-run
-spool off
-
-#Network File Shares (NSF)
-
-spool logs/log.nfs.mount.udp
-use auxiliary/scanner/nfs/nfsmount
-set RHOSTS file:111-udp-hosts.txt
-set threads 1
-run
-spool off
-
-spool logs/log.nfs.mount.tcp
-set RHOSTS file:111-tcp-hosts.txt
-set protocol tcp
-set threads 1
 run
 spool off
 
@@ -698,5 +660,45 @@ set RHOSTS file:rsync-hosts.txt
 set RPORT 873
 run
 spool off
+
+#Telnet tests (version/banner grab, default logins)
+
+#spool logs/log.telnet.version
+#use auxiliary/scanner/telnet/telnet_version
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#run
+#spool off
+
+#spool logs/log.telnet.login.admin
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username admin
+#set password admin
+#run
+#spool off
+
+#spool logs/log.telnet.login.root
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username root
+#set password root
+#run
+#spool off
+
+#spool logs/log.telnet.login.cisco
+#use auxiliary/scanner/telnet/telnet_login
+#set RHOSTS file:telnet-hosts.txt
+#set threads 1
+#set timeout 5
+#set username cisco
+#set password cisco
+#run
+#spool off
 
 exit
