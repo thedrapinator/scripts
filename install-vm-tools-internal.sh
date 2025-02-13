@@ -16,6 +16,10 @@ mkdir -p $tools
 sudo apt update
 sudo apt install -y enum4linux ldapscripts jq parallel seclists nuclei netexec #bloodhound
 
+#Tmux config
+echo "set -g history-limit 50000" >> ~/.tmux.conf
+echo "set -g mouse on" >> ~/.tmux.conf
+
 #netexec
 #sudo apt install pipx git -y
 #pipx ensurepath
